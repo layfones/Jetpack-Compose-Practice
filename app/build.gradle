@@ -1,0 +1,125 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace 'com.layfones.composewanandroid'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.layfones.composewanandroid"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // kotlinOptions {
+    //     jvmTarget = '17'
+    // }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.0'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation "androidx.compose.ui:ui:$compose_ui_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.activity:activity-compose:1.7.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+
+    implementation "io.coil-kt:coil-compose:2.2.2"
+
+    api 'androidx.webkit:webkit:1.6.0'
+
+    implementation "com.google.accompanist:accompanist-webview:0.30.0"
+
+    /** accompanist辅助插件 */
+    // implementation "com.google.accompanist:accompanist-insets:$accompanistVersion"
+    // implementation "com.google.accompanist:accompanist-coil:0.15.0"
+    // implementation "com.google.accompanist:accompanist-navigation-animation:0.24.13-rc"
+    //系统ui控制器
+     implementation "com.google.accompanist:accompanist-systemuicontroller:0.30.0"
+    //viewPager
+    implementation "com.google.accompanist:accompanist-pager:0.28.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.28.0"
+//    api "com.google.accompanist:accompanist-permissions:0.28.0"
+    implementation "com.google.accompanist:accompanist-navigation-animation:0.30.0"
+    //下拉刷新
+    // implementation "com.google.accompanist:accompanist-swiperefresh:$accompanistVersion"
+    //流式布局
+    implementation "com.google.accompanist:accompanist-flowlayout:0.30.0"
+    // implementation "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
+    //placeholder
+    // implementation "com.google.accompanist:accompanist-placeholder-material:$accompanistVersion"
+    //paging分页库
+    // implementation "androidx.paging:paging-runtime:$pagingVersion"
+    // testImplementation "androidx.paging:paging-common:$pagingVersion"
+    // implementation "androidx.paging:paging-compose:$pagingComposeVersion"
+
+    //hilt inject framework
+    implementation "com.google.dagger:hilt-android:2.45"
+    kapt "com.google.dagger:hilt-compiler:2.45"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+    implementation "androidx.navigation:navigation-compose:2.5.3"
+
+    //paging
+    implementation 'androidx.paging:paging-runtime:3.1.1'
+    implementation 'androidx.paging:paging-compose:1.0.0-alpha18'
+
+    // custom declaration for latest versions of material 3 and adaptive accompanist
+    implementation("androidx.compose.material3:material3:1.1.0-alpha07")
+    implementation("com.google.accompanist:accompanist-adaptive:0.26.2-beta")
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.preference:preference:1.2.0"
+    implementation "com.squareup.okhttp3:okhttp:4.10.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    // For instrumentation tests
+    androidTestImplementation  'com.google.dagger:hilt-android-testing:2.45'
+    androidTestAnnotationProcessor 'com.google.dagger:hilt-compiler:2.45'
+
+    // For local unit tests
+    testImplementation 'com.google.dagger:hilt-android-testing:2.45'
+    testAnnotationProcessor 'com.google.dagger:hilt-compiler:2.45'
+}

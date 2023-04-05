@@ -1,0 +1,33 @@
+package com.layfones.composewanandroid.ui.screens.message
+
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemsIndexed
+import com.layfones.composewanandroid.data.services.model.MsgBean
+import com.layfones.composewanandroid.ui.components.MessageItem
+import com.layfones.composewanandroid.ui.components.StatePage
+
+@Composable
+fun MessageList(index:Int, viewModel: MessageListViewModel = hiltViewModel()) {
+
+    val messageFlow: LazyPagingItems<MsgBean> = if (index == 0) {
+        viewModel.getUnreadMsgFlow.collectAsLazyPagingItems()
+    } else {
+        viewModel.getReadiedMsgFlow.collectAsLazyPagingItems()
+    }
+
+    StatePage(loading = messageFlow.loadState.refresh is LoadState.Loading, empty = messageFlow.itemCount == 0) {
+        LazyColumn(Modifier.fillMaxSize()) {
+            itemsIndexed(messageFlow) { _, value ->
+                MessageItem(message = value!!, modifier = Modifier)
+            }
+        }
+    }
+
+}
