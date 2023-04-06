@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base.http
+package com.layfones.composewanandroid.common.http
 
 import com.layfones.composewanandroid.util.DataStoreUtils
 import okhttp3.Interceptor

@@ -1,6 +1,6 @@
 package com.layfones.composewanandroid.di
 
-import com.layfones.composewanandroid.base.AppLog
+import com.layfones.composewanandroid.common.AppLog
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

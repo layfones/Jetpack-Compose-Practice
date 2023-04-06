@@ -10,7 +10,6 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,7 +24,7 @@ import com.layfones.composewanandroid.ui.components.StatePage
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AnswerScreen(viewModel: AnswerViewModel = hiltViewModel()) {
-    val viewState = remember { viewModel.viewState }
+    val viewState = viewModel.viewState
     val data = viewState.pagingData.collectAsLazyPagingItems()
     val navHostController = LocalNavController.current
     val refreshing = (data.loadState.refresh is LoadState.Loading && data.itemCount > 0)
@@ -33,10 +32,10 @@ fun AnswerScreen(viewModel: AnswerViewModel = hiltViewModel()) {
 
     StatePage(loading = data.loadState.refresh is LoadState.Loading, empty = data.itemCount == 0) {
         Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
-            LazyColumn(Modifier.fillMaxSize()) {
+            LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
                 itemsIndexed(data) { _, value ->
                     PostItem(article = value!!, modifier = Modifier.clickable {
-                        navHostController.navigate(Router.web+"/${Uri.encode(value.link)}")
+                        navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")
                     })
                 }
             }

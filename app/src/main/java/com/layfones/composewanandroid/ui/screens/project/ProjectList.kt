@@ -30,12 +30,13 @@ fun ProjectList(viewModel: ProjectListViewModel) {
     val refreshing = data.loadState.refresh is LoadState.Loading && data.itemCount > 0
     val pullRefreshState =
         rememberPullRefreshState(refreshing = refreshing, onRefresh = { data.refresh() })
+
     StatePage(loading = data.loadState.refresh is LoadState.Loading ,data.itemCount == 0) {
         Box(
             Modifier
                 .pullRefresh(pullRefreshState)
         ) {
-            LazyColumn(Modifier.fillMaxSize()) {
+            LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
                 itemsIndexed(data) { _, value ->
                     ProjectItem(value!!, Modifier.clickable {
                         navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")

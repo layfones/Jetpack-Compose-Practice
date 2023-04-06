@@ -9,8 +9,10 @@ import androidx.paging.cachedIn
 import com.layfones.composewanandroid.account.IAccountViewModelDelegate
 import com.layfones.composewanandroid.data.repository.CoinRepository
 import com.layfones.composewanandroid.data.services.model.CoinHistory
+import com.layfones.composewanandroid.data.services.model.UserBaseInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,11 +21,17 @@ class CoinViewModel @Inject constructor(
     accountViewModelDelegate: IAccountViewModelDelegate
 ) : ViewModel(), IAccountViewModelDelegate by accountViewModelDelegate {
 
-    val userBaseInfoFlow = accountViewModelDelegate.accountInfo
+    private val coinHistoryFlow by lazy { repository.getCoinHistoryFlow().cachedIn(viewModelScope) }
 
-    val coinHistoryFlow = repository.getCoinHistoryFlow().cachedIn(viewModelScope)
-
-    val viewState by mutableStateOf(CoinViewState(coinHistoryFlow))
+    val viewState by mutableStateOf(
+        CoinViewState(
+            coinHistoryFlow,
+            accountViewModelDelegate.accountInfo
+        )
+    )
 }
 
-data class CoinViewState(val pagingData: Flow<PagingData<CoinHistory>>)
+data class CoinViewState(
+    val pagingData: Flow<PagingData<CoinHistory>>,
+    val accountInfo: StateFlow<UserBaseInfo>
+)

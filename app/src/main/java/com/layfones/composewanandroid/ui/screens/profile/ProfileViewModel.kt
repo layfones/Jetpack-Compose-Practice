@@ -17,10 +17,11 @@ class ProfileViewModel @Inject constructor(private val accountViewModelDelegate:
         onLogin()
     }
 
+    val github = "https://github.com/layfones/Jetpack-Compose-Practice"
+
     private fun onLogin() {
         viewModelScope.launch {
             accountState.collect {
-                Log.d("就这???", "onLogin: ")
                 when (it) {
                     is AccountState.Login -> fetchUserInfo()
                     AccountState.Logout -> {}

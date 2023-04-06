@@ -9,9 +9,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MessageListViewModel @Inject constructor(repository: MessageRepository):ViewModel() {
-    val getReadiedMsgFlow = repository.getReadiedMsgFlow().cachedIn(viewModelScope)
 
+    val getReadiedMsgFlow = repository.getReadiedMsgFlow().cachedIn(viewModelScope)
     val getUnreadMsgFlow = repository.getUnreadMsgFlow().cachedIn(viewModelScope)
 
-//    fun clearUnreadMessage() = unreadMessageManager.clearUnreadMessage()
 }

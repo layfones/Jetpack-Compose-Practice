@@ -1,8 +1,8 @@
 package com.layfones.composewanandroid.account
 
-import com.layfones.composewanandroid.base.http.adapter.NetworkResponse
-import com.layfones.composewanandroid.base.http.adapter.isSuccess
-import com.layfones.composewanandroid.base.http.adapter.whenSuccess
+import com.layfones.composewanandroid.common.http.adapter.NetworkResponse
+import com.layfones.composewanandroid.common.http.adapter.isSuccess
+import com.layfones.composewanandroid.common.http.adapter.whenSuccess
 import com.layfones.composewanandroid.data.services.AccountService
 import com.layfones.composewanandroid.data.services.model.User
 import com.layfones.composewanandroid.data.services.model.UserBaseInfo

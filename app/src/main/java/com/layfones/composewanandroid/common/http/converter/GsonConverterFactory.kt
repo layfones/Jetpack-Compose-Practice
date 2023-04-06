@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base.http.converter
+package com.layfones.composewanandroid.common.http.converter
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -32,6 +32,15 @@ class GsonConverterFactory(private val gson: Gson) : Converter.Factory() {
         }
         return GsonResponseBodyConverter(
             gson,
+            /**
+             * 获取NetWorkResponse包装内的第一个泛型，如NetWorkResponse<List<Article>>获取List<Article>以让Gson成功解析
+             */
+            /**
+             * 获取NetWorkResponse包装内的第一个泛型，如NetWorkResponse<List<Article>>获取List<Article>以让Gson成功解析
+             */
+            /**
+             * 获取NetWorkResponse包装内的第一个泛型，如NetWorkResponse<List<Article>>获取List<Article>以让Gson成功解析
+             */
             /**
              * 获取NetWorkResponse包装内的第一个泛型，如NetWorkResponse<List<Article>>获取List<Article>以让Gson成功解析
              */

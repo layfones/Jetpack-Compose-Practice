@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.layfones.composewanandroid.account.IAccountViewModelDelegate
 import com.layfones.composewanandroid.account.LocalUserInfo
-import com.layfones.composewanandroid.base.http.adapter.isSuccess
+import com.layfones.composewanandroid.common.http.adapter.isSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*

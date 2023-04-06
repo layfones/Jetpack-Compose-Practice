@@ -1,10 +1,7 @@
 package com.layfones.composewanandroid.account
 
-import android.content.Context
-import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.layfones.composewanandroid.data.services.model.User
-import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
 import com.layfones.composewanandroid.util.showShortToast
 

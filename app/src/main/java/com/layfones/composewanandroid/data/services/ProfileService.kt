@@ -1,6 +1,6 @@
 package com.layfones.composewanandroid.data.services
 
-import com.layfones.composewanandroid.base.http.adapter.NetworkResponse
+import com.layfones.composewanandroid.common.http.adapter.NetworkResponse
 import com.layfones.composewanandroid.data.services.model.MsgBean
 import com.layfones.composewanandroid.data.services.model.PageResponse
 import com.layfones.composewanandroid.data.services.model.ShareBean

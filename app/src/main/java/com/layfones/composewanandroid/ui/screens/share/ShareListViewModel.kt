@@ -1,5 +1,6 @@
 package com.layfones.composewanandroid.ui.screens.share
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -43,6 +44,5 @@ class ShareListViewModel @Inject constructor(
 data class ShareListViewState(
     val pagingData: Flow<PagingData<Article>>,
     val sharerCoinInfo: Flow<CoinInfo>,
-    val loading: Boolean = false,
-    val error: String = "",
+    val listState: LazyListState = LazyListState(),
 )

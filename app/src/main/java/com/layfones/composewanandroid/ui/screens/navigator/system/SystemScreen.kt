@@ -18,7 +18,7 @@ import com.layfones.composewanandroid.ui.components.StatePage
 fun SystemScreen(viewModel: SystemViewModel = hiltViewModel()) {
     val viewState = viewModel.viewState
     StatePage(loading = viewState.list.isEmpty(), empty = viewState.list.isEmpty()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(modifier = Modifier.fillMaxSize(), state = viewState.listState) {
             viewState.list.forEachIndexed { _, value ->
                 stickyHeader(key = value.name + "_sys_header") {
                     ListItemHeader(title = value.name)

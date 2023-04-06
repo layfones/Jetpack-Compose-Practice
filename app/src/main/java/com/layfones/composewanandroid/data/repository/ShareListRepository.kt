@@ -2,10 +2,10 @@ package com.layfones.composewanandroid.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.layfones.composewanandroid.base.IntKeyPagingSource
-import com.layfones.composewanandroid.base.http.adapter.NetworkResponse
-import com.layfones.composewanandroid.base.http.adapter.getOrNull
-import com.layfones.composewanandroid.base.http.adapter.whenSuccess
+import com.layfones.composewanandroid.common.IntKeyPagingSource
+import com.layfones.composewanandroid.common.http.adapter.NetworkResponse
+import com.layfones.composewanandroid.common.http.adapter.getOrNull
+import com.layfones.composewanandroid.common.http.adapter.whenSuccess
 import com.layfones.composewanandroid.data.services.BaseService
 import com.layfones.composewanandroid.data.services.ProfileService
 import com.layfones.composewanandroid.data.services.model.CoinInfo

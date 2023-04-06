@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base.http
+package com.layfones.composewanandroid.common.http
 
 import android.content.Context
 import androidx.datastore.core.DataStore

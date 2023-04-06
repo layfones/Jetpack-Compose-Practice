@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base.http.adapter
+package com.layfones.composewanandroid.common.http.adapter
 
 import okhttp3.Request
 import okio.Timeout

@@ -1,8 +1,8 @@
-package com.layfones.composewanandroid.base.http.converter
+package com.layfones.composewanandroid.common.http.converter
 
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
-import com.layfones.composewanandroid.base.http.adapter.NetworkResponse
+import com.layfones.composewanandroid.common.http.adapter.NetworkResponse
 import okhttp3.ResponseBody
 import retrofit2.Converter
 

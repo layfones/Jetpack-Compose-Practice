@@ -1,9 +1,9 @@
-package com.layfones.composewanandroid.base.http
+package com.layfones.composewanandroid.common.http
 
-import com.layfones.composewanandroid.base.AppLog
-import com.layfones.composewanandroid.base.http.adapter.ErrorHandler
-import com.layfones.composewanandroid.base.http.adapter.NetworkResponseAdapterFactory
-import com.layfones.composewanandroid.base.http.converter.GsonConverterFactory
+import com.layfones.composewanandroid.common.AppLog
+import com.layfones.composewanandroid.common.http.adapter.ErrorHandler
+import com.layfones.composewanandroid.common.http.adapter.NetworkResponseAdapterFactory
+import com.layfones.composewanandroid.common.http.converter.GsonConverterFactory
 import com.layfones.composewanandroid.di.ApplicationCoroutineScope
 import com.layfones.composewanandroid.di.CoroutinesModule
 import com.layfones.composewanandroid.data.services.BaseService

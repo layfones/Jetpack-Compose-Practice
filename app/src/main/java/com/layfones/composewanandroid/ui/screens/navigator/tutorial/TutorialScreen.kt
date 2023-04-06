@@ -13,7 +13,7 @@ import com.layfones.composewanandroid.ui.components.TutorialItem
 fun TutorialScreen(viewModel: TutorialViewModel = hiltViewModel()) {
     val viewState = viewModel.viewState
     StatePage(loading = viewState.list.isEmpty(), viewState.list.isEmpty()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(modifier = Modifier.fillMaxSize(), state = viewState.listState) {
             itemsIndexed(viewState.list) { _, value ->
                 TutorialItem(value)
             }

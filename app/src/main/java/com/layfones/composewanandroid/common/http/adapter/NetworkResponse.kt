@@ -1,6 +1,6 @@
-package com.layfones.composewanandroid.base.http.adapter
+package com.layfones.composewanandroid.common.http.adapter
 
-import com.layfones.composewanandroid.base.http.exception.ApiException
+import com.layfones.composewanandroid.common.http.exception.ApiException
 import com.layfones.composewanandroid.result.Result
 
 /**

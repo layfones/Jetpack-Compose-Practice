@@ -1,37 +1,28 @@
 package com.layfones.composewanandroid.ui.screens.home
 
 import WanTab
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Tab
-import androidx.compose.material.TabRow
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import com.layfones.composewanandroid.ui.screens.home.answer.AnswerScreen
 import com.layfones.composewanandroid.ui.screens.home.explore.ExploreScreen
 import com.layfones.composewanandroid.ui.screens.home.square.SquareScreen
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen() {
     Column(Modifier.fillMaxSize()) {
 
-        val titles = listOf("首页", "广场", "问答")
+        val titles = remember { listOf("首页", "广场", "问答") }
         val pagerState = rememberPagerState()
 
         Box(

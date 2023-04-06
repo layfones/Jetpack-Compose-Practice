@@ -1,5 +1,6 @@
 package com.layfones.composewanandroid.ui.screens.group
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.*
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModel
@@ -18,20 +19,22 @@ import kotlinx.coroutines.flow.Flow
 
 class GroupListViewModel(val id: Int, val repository: GroupRepository) : ViewModel() {
 
-    private val get by lazy {
+    private val pagingDataFlow by lazy {
         repository.getAuthorArticles(id).cachedIn(viewModelScope)
     }
 
-    var viewState by mutableStateOf(GroupListViewState(get))
+    var viewState by mutableStateOf(GroupListViewState(pagingDataFlow, LazyListState()))
+        private set
 
 }
 
 data class GroupListViewState(
-    val projectList: Flow<PagingData<Article>>
+    val projectList: Flow<PagingData<Article>>,
+    val listState: LazyListState
 )
 
 @Composable
-inline fun <reified VM : ViewModel> createGroupListViewModel(id: Int) :VM {
+inline fun <reified VM : ViewModel> createGroupListViewModel(id: Int): VM {
     val owner = LocalViewModelStoreOwner.current
     val defaultExtras = remember {
         (owner as? HasDefaultViewModelProviderFactory)?.defaultViewModelCreationExtras

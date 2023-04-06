@@ -1,11 +1,10 @@
 package com.layfones.composewanandroid.data.repository
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.layfones.composewanandroid.base.IntKeyPagingSource
-import com.layfones.composewanandroid.base.http.adapter.getOrNull
+import com.layfones.composewanandroid.common.IntKeyPagingSource
+import com.layfones.composewanandroid.common.http.adapter.getOrNull
 import com.layfones.composewanandroid.data.services.BaseService
 import com.layfones.composewanandroid.data.services.ProjectService
 import com.layfones.composewanandroid.data.services.model.Article
@@ -20,7 +19,6 @@ class ProjectRepository @Inject constructor(private val service: ProjectService)
      * 项目列表Flow
      */
     fun getProjectListFlow(pageSize: Int, categoryId: Int): Flow<PagingData<Article>> {
-        Log.d("项目列表Flow:::", "pageSize: "+pageSize+"        categoryId:"+categoryId)
         return Pager(
             PagingConfig(
                 pageSize = pageSize,

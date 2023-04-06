@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base.http.adapter
+package com.layfones.composewanandroid.common.http.adapter
 
 import retrofit2.Call
 import retrofit2.CallAdapter

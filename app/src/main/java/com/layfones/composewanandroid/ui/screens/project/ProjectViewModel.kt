@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.layfones.composewanandroid.base.http.adapter.getOrNull
+import com.layfones.composewanandroid.common.http.adapter.getOrNull
 import com.layfones.composewanandroid.data.repository.ProjectRepository
 import com.layfones.composewanandroid.data.services.model.ProjectTitle
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,14 +24,8 @@ class ProjectViewModel @Inject constructor(private val repository: ProjectReposi
         }
     }
 
-    // fun getProjectList(categoryId: Int) {
-    //     viewModelScope.launch {
-    //         val projectListFlow: Flow<PagingData<Article>> = repository.getProjectListFlow(BaseService.DEFAULT_PAGE_SIZE, categoryId)
-    //         viewState = viewState.copy(projectList = projectListFlow)
-    //     }
-    // }
-
     var viewState by mutableStateOf(ProjectViewState(titleData = emptyList()))
+        private set
 }
 
 data class ProjectViewState(

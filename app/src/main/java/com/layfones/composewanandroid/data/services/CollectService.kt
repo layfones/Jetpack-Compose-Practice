@@ -1,6 +1,6 @@
 package com.layfones.composewanandroid.data.services
 
-import com.layfones.composewanandroid.base.http.adapter.NetworkResponse
+import com.layfones.composewanandroid.common.http.adapter.NetworkResponse
 import com.layfones.composewanandroid.data.services.model.CollectBean
 import com.layfones.composewanandroid.data.services.model.PageResponse
 import retrofit2.http.GET

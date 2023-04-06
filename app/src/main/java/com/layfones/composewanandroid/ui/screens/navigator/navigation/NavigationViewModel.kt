@@ -1,11 +1,12 @@
 package com.layfones.composewanandroid.ui.screens.navigator.navigation
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.layfones.composewanandroid.base.http.adapter.getOrNull
+import com.layfones.composewanandroid.common.http.adapter.getOrNull
 import com.layfones.composewanandroid.data.repository.NavigatorRepository
 import com.layfones.composewanandroid.data.services.model.Navigation
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,5 +33,6 @@ class NavigationViewModel @Inject constructor(private val repository: NavigatorR
 }
 
 data class NavigationViewState(
-    val dataList: List<Navigation> = emptyList()
+    val dataList: List<Navigation> = emptyList(),
+    val listState: LazyListState = LazyListState()
 )

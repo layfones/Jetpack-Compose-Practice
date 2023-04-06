@@ -18,24 +18,23 @@ import androidx.paging.compose.itemsIndexed
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
 import com.layfones.composewanandroid.ui.components.PostItem
-import com.layfones.composewanandroid.ui.components.ProjectItem
 import com.layfones.composewanandroid.ui.components.StatePage
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun GroupList(viewModel:GroupListViewModel) {
+fun GroupList(viewModel: GroupListViewModel) {
     val navHostController = LocalNavController.current
     val viewState = viewModel.viewState
     val data = viewState.projectList.collectAsLazyPagingItems()
     val refreshing = data.loadState.refresh is LoadState.Loading && data.itemCount > 0
     val pullRefreshState =
         rememberPullRefreshState(refreshing = refreshing, onRefresh = { data.refresh() })
-    StatePage(loading = data.loadState.refresh is LoadState.Loading ,data.itemCount == 0) {
+    StatePage(loading = data.loadState.refresh is LoadState.Loading, data.itemCount == 0) {
         Box(
             Modifier
                 .pullRefresh(pullRefreshState)
         ) {
-            LazyColumn(Modifier.fillMaxSize()) {
+            LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
                 itemsIndexed(data) { _, value ->
                     PostItem(value!!, Modifier.clickable {
                         navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")

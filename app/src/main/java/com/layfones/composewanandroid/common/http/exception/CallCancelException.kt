@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base.http.exception
+package com.layfones.composewanandroid.common.http.exception
 
 import java.io.IOException
 

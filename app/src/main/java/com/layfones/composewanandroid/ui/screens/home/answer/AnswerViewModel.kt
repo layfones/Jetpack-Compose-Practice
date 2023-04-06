@@ -25,7 +25,6 @@ class AnswerViewModel @Inject constructor(private val repository: HomeRepository
 }
 
 data class AnswerViewState(
-    val isRefreshing: Boolean = false,
     val listState: LazyListState = LazyListState(),
     val pagingData: Flow<PagingData<Article>>
 )

@@ -1,7 +1,7 @@
-package com.layfones.composewanandroid.base.http
+package com.layfones.composewanandroid.common.http
 
-import com.layfones.composewanandroid.WanandroidApp
-import com.layfones.composewanandroid.base.http.adapter.ErrorHandler
+import com.layfones.composewanandroid.App
+import com.layfones.composewanandroid.common.http.adapter.ErrorHandler
 import com.layfones.composewanandroid.util.NetworkUtil
 import com.layfones.composewanandroid.util.showShortToast
 import java.io.IOException
@@ -17,7 +17,7 @@ object ErrorToastHandler: ErrorHandler {
     private fun handle(throwable: Throwable):String =
         when (throwable) {
             is IOException -> {
-                if (NetworkUtil.isNetworkAvailable(WanandroidApp.app).not()) {
+                if (NetworkUtil.isNetworkAvailable(App.app).not()) {
                     ERROR_NET_WORK_DISCONNECTED
                 } else ERROR_DEFAULT
             }

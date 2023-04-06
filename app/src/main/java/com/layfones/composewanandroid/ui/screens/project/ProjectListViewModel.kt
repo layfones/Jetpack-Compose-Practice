@@ -21,22 +21,22 @@ import kotlinx.coroutines.flow.Flow
 
 class ProjectListViewModel(val id: Int, val repository: ProjectRepository) : ViewModel() {
 
-    private val get by lazy {
+    private val pagingDataFlow by lazy {
         repository.getProjectListFlow(BaseService.DEFAULT_PAGE_SIZE, id).cachedIn(viewModelScope)
     }
 
-    var viewState by mutableStateOf(ProjectListViewState(projectList = get))
+    var viewState by mutableStateOf(ProjectListViewState(projectList = pagingDataFlow))
+        private set
 }
 
 @Immutable
 data class ProjectListViewState(
-    val isRefreshing: Boolean = false,
     val listState: LazyListState = LazyListState(),
     val projectList: Flow<PagingData<Article>>
 )
 
 @Composable
-inline fun <reified VM : ViewModel> createProjectListViewModel(id: Int) :VM {
+inline fun <reified VM : ViewModel> createProjectListViewModel(id: Int): VM {
     val owner = LocalViewModelStoreOwner.current
     val defaultExtras = remember {
         (owner as? HasDefaultViewModelProviderFactory)?.defaultViewModelCreationExtras

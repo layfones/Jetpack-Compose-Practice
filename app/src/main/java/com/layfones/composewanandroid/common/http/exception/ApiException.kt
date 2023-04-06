@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base.http.exception
+package com.layfones.composewanandroid.common.http.exception
 
 class ApiException(val code: Int, override val message: String?) : RuntimeException(message) {
 

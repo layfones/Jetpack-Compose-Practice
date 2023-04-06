@@ -30,17 +30,26 @@ fun SquareScreen(viewModel: SquareViewModel = hiltViewModel()) {
     val viewState = remember { viewModel.viewState }
     val squareData = viewState.pagingData.collectAsLazyPagingItems()
     val refreshing = squareData.loadState.refresh is LoadState.Loading && squareData.itemCount > 0
-    val pullRefreshState = rememberPullRefreshState(refreshing = refreshing, onRefresh = { squareData.refresh() })
-    StatePage(loading = squareData.loadState.refresh is LoadState.Loading,squareData.itemCount == 0) {
+    val pullRefreshState =
+        rememberPullRefreshState(refreshing = refreshing, onRefresh = { squareData.refresh() })
+
+    StatePage(
+        loading = squareData.loadState.refresh is LoadState.Loading,
+        squareData.itemCount == 0
+    ) {
         Box(Modifier.pullRefresh(pullRefreshState)) {
-            LazyColumn(Modifier.fillMaxSize()) {
-                itemsIndexed(squareData) { index, value ->
+            LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
+                itemsIndexed(squareData) { _, value ->
                     PostItem(value!!, modifier = Modifier.clickable {
-                        navHostController.navigate(Router.web+"/${Uri.encode(value.link)}")
+                        navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")
                     })
                 }
             }
-            PullRefreshIndicator(squareData.loadState.refresh is LoadState.Loading, pullRefreshState, Modifier.align(Alignment.TopCenter))
+            PullRefreshIndicator(
+                squareData.loadState.refresh is LoadState.Loading,
+                pullRefreshState,
+                Modifier.align(Alignment.TopCenter)
+            )
         }
     }
 }

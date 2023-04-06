@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base
+package com.layfones.composewanandroid.common
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

@@ -14,7 +14,7 @@ import com.layfones.composewanandroid.ui.components.MessageItem
 import com.layfones.composewanandroid.ui.components.StatePage
 
 @Composable
-fun MessageList(index:Int, viewModel: MessageListViewModel = hiltViewModel()) {
+fun MessageList(index: Int, viewModel: MessageListViewModel = hiltViewModel()) {
 
     val messageFlow: LazyPagingItems<MsgBean> = if (index == 0) {
         viewModel.getUnreadMsgFlow.collectAsLazyPagingItems()
@@ -22,7 +22,10 @@ fun MessageList(index:Int, viewModel: MessageListViewModel = hiltViewModel()) {
         viewModel.getReadiedMsgFlow.collectAsLazyPagingItems()
     }
 
-    StatePage(loading = messageFlow.loadState.refresh is LoadState.Loading, empty = messageFlow.itemCount == 0) {
+    StatePage(
+        loading = messageFlow.loadState.refresh is LoadState.Loading,
+        empty = messageFlow.itemCount == 0
+    ) {
         LazyColumn(Modifier.fillMaxSize()) {
             itemsIndexed(messageFlow) { _, value ->
                 MessageItem(message = value!!, modifier = Modifier)

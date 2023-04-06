@@ -1,7 +1,7 @@
 package com.layfones.composewanandroid.data.services.impl
 
 
-import com.layfones.composewanandroid.base.http.RetrofitManager
+import com.layfones.composewanandroid.common.http.RetrofitManager
 import com.layfones.composewanandroid.data.services.AccountService
 import javax.inject.Inject
 

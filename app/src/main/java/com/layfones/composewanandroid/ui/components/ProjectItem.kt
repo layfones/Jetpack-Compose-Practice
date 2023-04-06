@@ -35,9 +35,6 @@ fun ProjectItem(article: Article, modifier: Modifier = Modifier) {
             Card(modifier = Modifier
                 .width(104.dp)
                 .height(165.dp)) {
-                val url = article.envelopePic
-                Log.d("他妈的", article.title +"---" +url)
-                // Image(painter = rememberAsyncImagePainter(url), contentDescription = null, modifier = Modifier.fillMaxSize())
                 AsyncImage(model = article.envelopePic, contentScale = ContentScale.Crop, contentDescription = null, modifier = Modifier.fillMaxSize())
             }
             Column(modifier = Modifier.padding(8.dp, 0.dp, 0.dp, 0.dp)) {

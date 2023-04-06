@@ -1,5 +1,6 @@
 package com.layfones.composewanandroid.ui.screens.profile
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,16 +20,16 @@ import com.layfones.composewanandroid.R
 import com.layfones.composewanandroid.account.checkLogin
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
-import com.layfones.composewanandroid.ui.WanAppState
+import com.layfones.composewanandroid.ui.WanAppViewModel
 import com.layfones.composewanandroid.ui.components.ListItemHeader
 import com.layfones.composewanandroid.ui.components.SettingsListItem
-import com.layfones.composewanandroid.ui.createAppStateViewModel
+import com.layfones.composewanandroid.ui.createAppViewModel
 import com.layfones.composewanandroid.ui.theme.WanandroidTheme
 
 @Preview
 @Composable
 fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
-    val wanAppState: WanAppState = createAppStateViewModel()
+    val wanAppViewModel: WanAppViewModel = createAppViewModel()
     val navHostController = LocalNavController.current
     val accountInfoState = viewModel.accountInfo.collectAsState()
     val userBaseInfo = accountInfoState.value
@@ -110,7 +111,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                     leadingIcon = R.drawable.ic_bedtime,
                     modifier = Modifier.clickable {
                         expanded = true
-                    }, supportingText = { Text(text = wanAppState.theme.named) })
+                    }, supportingText = { Text(text = wanAppViewModel.theme.named) })
                 DropdownMenu(
                     expanded = expanded,
                     onDismissRequest = {
@@ -122,26 +123,41 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                     DropdownMenuItem(
                         text = { Text(text = WanandroidTheme.SYSTEM.named) },
                         onClick = {
-                            wanAppState.theme = WanandroidTheme.SYSTEM
+                            wanAppViewModel.theme = WanandroidTheme.SYSTEM
                             expanded = false
                         },
-                        modifier = Modifier.background(getBackgroundColor(wanAppState = wanAppState, theme = WanandroidTheme.SYSTEM))
+                        modifier = Modifier.background(
+                            getBackgroundColor(
+                                wanAppViewModel = wanAppViewModel,
+                                theme = WanandroidTheme.SYSTEM
+                            )
+                        )
                     )
                     DropdownMenuItem(
                         text = { Text(text = WanandroidTheme.DARK.named) },
                         onClick = {
-                            wanAppState.theme = WanandroidTheme.DARK
+                            wanAppViewModel.theme = WanandroidTheme.DARK
                             expanded = false
                         },
-                        modifier = Modifier.background(getBackgroundColor(wanAppState = wanAppState, theme = WanandroidTheme.DARK))
+                        modifier = Modifier.background(
+                            getBackgroundColor(
+                                wanAppViewModel = wanAppViewModel,
+                                theme = WanandroidTheme.DARK
+                            )
+                        )
                     )
                     DropdownMenuItem(
                         text = { Text(text = WanandroidTheme.LIGHT.named) },
                         onClick = {
-                            wanAppState.theme = WanandroidTheme.LIGHT
+                            wanAppViewModel.theme = WanandroidTheme.LIGHT
                             expanded = false
                         },
-                        modifier = Modifier.background(getBackgroundColor(wanAppState = wanAppState, theme = WanandroidTheme.LIGHT))
+                        modifier = Modifier.background(
+                            getBackgroundColor(
+                                wanAppViewModel = wanAppViewModel,
+                                theme = WanandroidTheme.LIGHT
+                            )
+                        )
                     )
                 }
             }
@@ -149,7 +165,8 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                 headlineText = "源代码",
                 leadingIcon = R.drawable.ic_code,
                 modifier = Modifier.clickable {
-                }, supportingText = { Text(text = "https://github") })
+                    navHostController.navigate(Router.web + "/${Uri.encode(viewModel.github)}")
+                }, supportingText = { Text(text = viewModel.github) })
             SettingsListItem(
                 headlineText = "关于",
                 leadingIcon = R.drawable.ic_memory,
@@ -173,9 +190,9 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
 
 @Composable
 fun getBackgroundColor(
-    wanAppState: WanAppState,
+    wanAppViewModel: WanAppViewModel,
     theme: WanandroidTheme
 ): Color {
-    return if (wanAppState.theme == theme) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.surface
+    return if (wanAppViewModel.theme == theme) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.surface
 }
 

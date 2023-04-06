@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base
+package com.layfones.composewanandroid.common
 
 import android.util.Log
 import com.layfones.composewanandroid.BuildConfig

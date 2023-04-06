@@ -3,7 +3,7 @@ package com.layfones.composewanandroid.di
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.layfones.composewanandroid.base.http.DataStoreFactory
+import com.layfones.composewanandroid.common.http.DataStoreFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

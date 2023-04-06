@@ -8,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,8 +21,8 @@ import com.layfones.composewanandroid.ui.components.StatePage
 @Composable
 fun CoinScreen(viewModel: CoinViewModel = hiltViewModel()) {
     val navHostController = LocalNavController.current
-    val viewState = remember { viewModel.viewState }
-    val userBaseInfoState = viewModel.userBaseInfoFlow.collectAsState()
+    val viewState = viewModel.viewState
+    val userBaseInfoState = viewState.accountInfo.collectAsState()
     val data = viewState.pagingData.collectAsLazyPagingItems()
     Column(
         Modifier
@@ -74,7 +73,10 @@ fun CoinScreen(viewModel: CoinViewModel = hiltViewModel()) {
                     val coinHistory = value!!
                     ListItem(
                         trailingContent = {
-                            Text(text = "${if (coinHistory.coinCount > 0) "+" + coinHistory.coinCount else coinHistory.coinCount}", style = MaterialTheme.typography.bodyMedium)
+                            Text(
+                                text = "${if (coinHistory.coinCount > 0) "+" + coinHistory.coinCount else coinHistory.coinCount}",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
                         },
                         headlineText = {
                             Text(text = coinHistory.reason)

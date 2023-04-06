@@ -12,7 +12,6 @@ import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,33 +30,48 @@ import com.layfones.composewanandroid.ui.components.StatePage
 @Composable
 fun CollectScreen(viewModel: CollectViewModel = hiltViewModel()) {
     val navHostController = LocalNavController.current
-    val viewState = remember {
-        viewModel.viewState
-    }
+    val viewState = viewModel.viewState
     val data = viewState.pagingData.collectAsLazyPagingItems()
     val refreshing = (data.loadState.refresh is LoadState.Loading && data.itemCount > 0)
     val pullRefreshState = rememberPullRefreshState(refreshing, { data.refresh() })
 
-    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).systemBarsPadding()) {
-       Box(
-           Modifier
-               .fillMaxWidth()) {
-           BackButton {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .systemBarsPadding()
+    ) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+        ) {
+            BackButton {
                 navHostController.popBackStack()
-           }
-           Text(text = "收藏文章", Modifier.align(Alignment.Center), style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.primary))
-       }
+            }
+            Text(
+                text = "收藏文章",
+                Modifier.align(Alignment.Center),
+                style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.primary)
+            )
+        }
 
-        StatePage(loading = data.loadState.refresh is LoadState.Loading, empty = data.itemCount == 0) {
+        StatePage(
+            loading = data.loadState.refresh is LoadState.Loading,
+            empty = data.itemCount == 0
+        ) {
             Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
                 LazyColumn(Modifier.fillMaxSize()) {
                     itemsIndexed(data) { _, value ->
                         CollectItem(collect = value!!, modifier = Modifier.clickable {
-                            navHostController.navigate(Router.web+"/${Uri.encode(value.link)}")
+                            navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")
                         })
                     }
                 }
-                PullRefreshIndicator(refreshing, pullRefreshState, Modifier.align(Alignment.TopCenter))
+                PullRefreshIndicator(
+                    refreshing,
+                    pullRefreshState,
+                    Modifier.align(Alignment.TopCenter)
+                )
             }
         }
     }

@@ -5,16 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.layfones.composewanandroid.base.http.adapter.getOrNull
+import com.layfones.composewanandroid.common.http.adapter.getOrNull
 import com.layfones.composewanandroid.data.repository.GroupRepository
-import com.layfones.composewanandroid.data.repository.ProjectRepository
 import com.layfones.composewanandroid.data.services.model.Classify
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class GroupViewModel @Inject constructor(private val repository: GroupRepository):ViewModel() {
+class GroupViewModel @Inject constructor(private val repository: GroupRepository) : ViewModel() {
 
     fun getGroupTitle() {
         viewModelScope.launch {

@@ -1,4 +1,4 @@
-package com.layfones.composewanandroid.base.http.converter
+package com.layfones.composewanandroid.common.http.converter
 
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter

@@ -2,9 +2,9 @@ package com.layfones.composewanandroid.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.layfones.composewanandroid.base.IntKeyPagingSource
-import com.layfones.composewanandroid.base.http.adapter.getOrElse
-import com.layfones.composewanandroid.base.http.adapter.getOrNull
+import com.layfones.composewanandroid.common.IntKeyPagingSource
+import com.layfones.composewanandroid.common.http.adapter.getOrElse
+import com.layfones.composewanandroid.common.http.adapter.getOrNull
 import com.layfones.composewanandroid.data.services.BaseService
 import com.layfones.composewanandroid.data.services.HomeService
 import com.layfones.composewanandroid.data.services.model.Banners

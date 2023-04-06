@@ -19,10 +19,10 @@ fun NavigationScreen(viewModel: NavigationViewModel = hiltViewModel()) {
     val viewState = viewModel.viewState
 
     StatePage(loading = viewState.dataList.isEmpty(), empty = viewState.dataList.isEmpty()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(modifier = Modifier.fillMaxSize(), state = viewState.listState) {
             viewState.dataList.forEachIndexed { _, value ->
                 stickyHeader(key = value.name + "_nav_header") { ListItemHeader(title = value.name) }
-                item(key ="item_" + value.name) {
+                item(key = "item_" + value.name) {
                     FlowRow(
                         mainAxisSpacing = 12.dp,
                         modifier = Modifier.padding(12.dp, 10.dp),

@@ -13,8 +13,8 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.ui.WanApp
-import com.layfones.composewanandroid.ui.WanAppState
-import com.layfones.composewanandroid.ui.createAppStateViewModel
+import com.layfones.composewanandroid.ui.WanAppViewModel
+import com.layfones.composewanandroid.ui.createAppViewModel
 import com.layfones.composewanandroid.ui.theme.ComposeWanandroidTheme
 import com.layfones.composewanandroid.ui.theme.WanandroidTheme
 import com.layfones.composewanandroid.util.WebViewManager
@@ -31,8 +31,8 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             val systemUiController = rememberSystemUiController()
-            val wanAppState: WanAppState = createAppStateViewModel()
-            val useDarkIcons = when (wanAppState.theme) {
+            val wanAppViewModel: WanAppViewModel = createAppViewModel()
+            val useDarkIcons = when (wanAppViewModel.theme) {
                 WanandroidTheme.LIGHT -> true
                 WanandroidTheme.DARK -> false
                 WanandroidTheme.SYSTEM -> !isSystemInDarkTheme()
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                 )
                 onDispose {}
             }
-            ComposeWanandroidTheme(wanAppState.theme) {
+            ComposeWanandroidTheme(wanAppViewModel.theme) {
                 val navController = rememberAnimatedNavController()
                 CompositionLocalProvider(LocalNavController provides navController) {
                     WanApp(navController)
