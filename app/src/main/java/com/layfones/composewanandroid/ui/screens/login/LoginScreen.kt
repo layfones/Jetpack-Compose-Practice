@@ -24,8 +24,6 @@ import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.ui.components.BackButton
 import kotlinx.coroutines.flow.collect
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
 fun LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
 
@@ -46,7 +44,7 @@ fun LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     LazyColumn(
         Modifier
             .fillMaxSize()
-            .background(Color.Cyan)
+            .background(MaterialTheme.colorScheme.background)
             .systemBarsPadding()
     ) {
         item {

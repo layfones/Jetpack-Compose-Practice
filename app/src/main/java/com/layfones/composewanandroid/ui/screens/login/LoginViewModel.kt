@@ -46,8 +46,8 @@ class LoginViewModel @Inject constructor(private val accountViewModelDelegate: I
 }
 
 data class LoginViewState(
-    val account: String = "layfones",
-    val password: String = "As228743029,",
+    val account: String = "",
+    val password: String = "",
     val isLoading: Boolean = false
 )
 

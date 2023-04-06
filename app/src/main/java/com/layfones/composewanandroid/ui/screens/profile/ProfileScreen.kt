@@ -41,7 +41,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                     .padding(vertical = 32.dp), horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    painter = painterResource(id = R.mipmap.ic_launcher_round),
+                    painter = painterResource(if (viewModel.isLogin) R.mipmap.ic_launcher_round else R.drawable.ic_person),
                     contentDescription = "",
                     modifier = Modifier
                         .size(90.dp)
