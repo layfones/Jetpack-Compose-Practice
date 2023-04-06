@@ -1,14 +1,23 @@
 package com.layfones.composewanandroid.common.http
 
-import com.layfones.composewanandroid.util.DataStoreUtils
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class CacheCookieInterceptor: Interceptor {
+class CacheCookieInterceptor : Interceptor {
 
     private val loginUrl = "user/login"
     private val registerUrl = "user/register"
-    private val SET_COOKIE_KEY = "set-cookie"
+
+
+    private val dataStore = DataStoreFactory.getDefaultPreferencesDataStore()
+
+    companion object {
+        private const val SET_COOKIE_KEY = "set-cookie"
+        private val PREFERENCE_KEY_COOKIE = stringPreferencesKey("key_wanandroid_cookie")
+    }
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -18,14 +27,18 @@ class CacheCookieInterceptor: Interceptor {
         if (aboutUser(requestUrl)) {
             val cookies = response.headers(SET_COOKIE_KEY)
             if (cookies.isNotEmpty()) {
-                //cookie可能有多个，都保存下来
-                DataStoreUtils.putSyncData(domain, encodeCookie(cookies))
+                runBlocking {
+                    dataStore.edit {
+                        it[PREFERENCE_KEY_COOKIE] = encodeCookie(cookies)
+                    }
+                }
             }
         }
         return response
     }
 
-    private fun aboutUser(url: String): Boolean = url.contains(loginUrl) or url.contains(registerUrl)
+    private fun aboutUser(url: String): Boolean =
+        url.contains(loginUrl) or url.contains(registerUrl)
 }
 
 /**

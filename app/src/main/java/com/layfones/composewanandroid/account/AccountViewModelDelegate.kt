@@ -15,9 +15,9 @@ interface IAccountViewModelDelegate {
     val isLogin: Boolean
     val userId: String
     suspend fun fetchUserInfo(): NetworkResponse<UserBaseInfo>
-    suspend fun login(localUserInfo: LocalUserInfo): NetworkResponse<User>
+    suspend fun login(loginParams: LoginParams): NetworkResponse<User>
     suspend fun logout(): NetworkResponse<Any>
-    suspend fun register(registerInfo: RegisterInfo): NetworkResponse<Any>
+    suspend fun register(registerParams: RegisterParams): NetworkResponse<Any>
 }
 
 internal class AccountViewModelDelegate @Inject constructor(
@@ -45,8 +45,8 @@ internal class AccountViewModelDelegate @Inject constructor(
         }
     }
 
-    override suspend fun login(localUserInfo: LocalUserInfo): NetworkResponse<User> {
-        val result = service.login(localUserInfo.username, localUserInfo.password)
+    override suspend fun login(loginParams: LoginParams): NetworkResponse<User> {
+        val result = service.login(loginParams.username, loginParams.password)
         result.whenSuccess { user ->
             accountManager.login(user)
         }
@@ -61,11 +61,11 @@ internal class AccountViewModelDelegate @Inject constructor(
         }
     }
 
-    override suspend fun register(registerInfo: RegisterInfo): NetworkResponse<Any> {
+    override suspend fun register(registerParams: RegisterParams): NetworkResponse<Any> {
         return service.register(
-            registerInfo.username,
-            registerInfo.password,
-            registerInfo.confirmPassword
+            registerParams.username,
+            registerParams.password,
+            registerParams.confirmPassword
         )
     }
 }

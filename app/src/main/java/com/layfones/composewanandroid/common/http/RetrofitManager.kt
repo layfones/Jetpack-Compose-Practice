@@ -16,11 +16,11 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitManager {
 
-    const val BASE_URL = "https://www.wanandroid.com"
+    private const val BASE_URL = "https://www.wanandroid.com"
 
     private const val TIMEOUT_SECONDS = 10
 
-    var loggingInterceptor = HttpLoggingInterceptor()
+    private var loggingInterceptor = HttpLoggingInterceptor()
 
 
     private val client: OkHttpClient

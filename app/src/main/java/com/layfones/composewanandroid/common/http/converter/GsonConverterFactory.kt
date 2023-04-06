@@ -35,15 +35,6 @@ class GsonConverterFactory(private val gson: Gson) : Converter.Factory() {
             /**
              * 获取NetWorkResponse包装内的第一个泛型，如NetWorkResponse<List<Article>>获取List<Article>以让Gson成功解析
              */
-            /**
-             * 获取NetWorkResponse包装内的第一个泛型，如NetWorkResponse<List<Article>>获取List<Article>以让Gson成功解析
-             */
-            /**
-             * 获取NetWorkResponse包装内的第一个泛型，如NetWorkResponse<List<Article>>获取List<Article>以让Gson成功解析
-             */
-            /**
-             * 获取NetWorkResponse包装内的第一个泛型，如NetWorkResponse<List<Article>>获取List<Article>以让Gson成功解析
-             */
             gson.getAdapter(TypeToken.get(getParameterUpperBound(0, type)))
         )
     }

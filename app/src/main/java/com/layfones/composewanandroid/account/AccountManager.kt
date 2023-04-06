@@ -25,6 +25,7 @@ class AccountManager @Inject constructor(
 ) {
     companion object {
         private val PREFERENCE_KEY_ACCOUNT_USER_INFO = stringPreferencesKey("key_account_user_info")
+        private val PREFERENCE_KEY_COOKIE = stringPreferencesKey("key_wanandroid_cookie")
     }
 
     private val userBaseInfoFlow: MutableStateFlow<UserBaseInfo> = MutableStateFlow(UserBaseInfo())
@@ -71,6 +72,14 @@ class AccountManager @Inject constructor(
         }
     }
 
+    fun clearUserCookie() {
+        applicationScope.launch(dispatcher) {
+            dataStore.edit {
+                it[PREFERENCE_KEY_COOKIE] = ""
+            }
+        }
+    }
+
     fun peekUserBaseInfo(): UserBaseInfo {
         return userBaseInfoFlow.value
     }
@@ -84,6 +93,7 @@ class AccountManager @Inject constructor(
     fun logout() {
         applicationScope.launch(dispatcher) {
             clearUserBaseInfo()
+            clearUserCookie()
             accountStateFlow.emit(AccountState.Logout)
         }
     }

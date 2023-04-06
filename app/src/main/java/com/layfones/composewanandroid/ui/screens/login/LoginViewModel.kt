@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.layfones.composewanandroid.account.IAccountViewModelDelegate
-import com.layfones.composewanandroid.account.LocalUserInfo
+import com.layfones.composewanandroid.account.LoginParams
 import com.layfones.composewanandroid.common.http.adapter.isSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -28,7 +28,7 @@ class LoginViewModel @Inject constructor(private val accountViewModelDelegate: I
     fun login() {
         viewModelScope.launch {
             val login =
-                accountViewModelDelegate.login(LocalUserInfo(viewState.account, viewState.password))
+                accountViewModelDelegate.login(LoginParams(viewState.account, viewState.password))
             if (login.isSuccess) {
                 _viewEvents.send(LoginViewEvent.PopBack)
             }
