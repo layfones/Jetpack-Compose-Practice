@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
 import com.layfones.composewanandroid.common.AppLog
+import com.layfones.composewanandroid.common.http.SetCookieInterceptor
 import com.layfones.composewanandroid.data.services.model.User
 import com.layfones.composewanandroid.data.services.model.UserBaseInfo
 import com.layfones.composewanandroid.di.ApplicationScope
@@ -16,6 +17,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class AccountManager @Inject constructor(
@@ -35,6 +37,12 @@ class AccountManager @Inject constructor(
 
     init {
         applicationScope.launch(dispatcher) {
+            launch {
+                val cookieData = readCookieData()
+                if (cookieData.isNotBlank()) {
+                    accountStateFlow.tryEmit(AccountState.Login())
+                }
+            }
             dataStore.data.catch {
                 AppLog.e(msg = "Error reading preferences.", throwable = it)
                 emit(emptyPreferences())
@@ -48,6 +56,17 @@ class AccountManager @Inject constructor(
                 userBaseInfoFlow.emit(userBaseInfo)
             }
         }
+    }
+
+    private fun readCookieData(): String {
+        var value = ""
+        runBlocking {
+            dataStore.data.first {
+                value = it[PREFERENCE_KEY_COOKIE] ?: ""
+                true
+            }
+        }
+        return value
     }
 
     fun collectUserInfoFlow(): StateFlow<UserBaseInfo> = userBaseInfoFlow

@@ -8,14 +8,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.layfones.composewanandroid.data.repository.DatabaseRepository
 import com.layfones.composewanandroid.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class ExploreViewModel @Inject constructor(private val repository: HomeRepository, private val databaseRepository: DatabaseRepository) : ViewModel() {
+class ExploreViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
 
     /**
      * 首页列表数据Flow
