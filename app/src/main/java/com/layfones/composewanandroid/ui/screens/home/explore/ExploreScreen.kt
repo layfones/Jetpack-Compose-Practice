@@ -27,6 +27,8 @@ import com.layfones.composewanandroid.ui.components.Banner
 import com.layfones.composewanandroid.ui.components.ExploreItem
 import com.layfones.composewanandroid.ui.components.StatePage
 import com.layfones.composewanandroid.ui.createAppViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -35,7 +37,9 @@ fun ExploreScreen(viewModel: ExploreViewModel = hiltViewModel()) {
 
     val appViewModel = createAppViewModel()
 
-    val viewState = viewModel.viewState
+    val viewState = remember {
+        viewModel.viewState
+    }
 
     val data = viewState.pagingDataFlow.collectAsLazyPagingItems()
     val navHostController = LocalNavController.current
@@ -44,9 +48,11 @@ fun ExploreScreen(viewModel: ExploreViewModel = hiltViewModel()) {
 
     LaunchedEffect(Unit) {
         appViewModel.collectFlow.collect {
-//            data.refresh()
+            val get = data[it.index] as Article
+            get.collect = it.isCollected
         }
     }
+
 
     StatePage(loading = data.loadState.refresh is LoadState.Loading, empty = data.itemCount == 0) {
         Box(Modifier.pullRefresh(pullRefreshState)) {
@@ -63,13 +69,18 @@ fun ExploreScreen(viewModel: ExploreViewModel = hiltViewModel()) {
                 }
                 itemsIndexed(data) { index, value ->
                     if (index > 0) {
-                        ExploreItem(article = value as Article, modifier = Modifier.clickable {
-                            navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")
-                        }, onClick = {
-                            navHostController.navigate(Router.share + "/${it.userId}")
-                        }, onCollect = {
-//                            appViewModel.articleCollectAction(it)
-                        })
+                        ExploreItem(
+                            article = value as Article,
+                            index = index,
+                            modifier = Modifier.clickable {
+                                navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")
+                            },
+                            onClick = {
+                                navHostController.navigate(Router.share + "/${it.userId}")
+                            },
+                            onCollect = {
+                                appViewModel.articleCollectAction(it)
+                            })
                     }
                 }
             }

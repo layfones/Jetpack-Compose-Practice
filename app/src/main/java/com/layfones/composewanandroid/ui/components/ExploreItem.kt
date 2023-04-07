@@ -5,7 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -15,7 +15,14 @@ import com.layfones.composewanandroid.data.services.model.CollectEvent
 import com.layfones.composewanandroid.R
 
 @Composable
-fun ExploreItem(article: Article, modifier: Modifier, onClick: (Article) -> Unit, onCollect:(CollectEvent)->Unit) {
+fun ExploreItem(
+    article: Article,
+    modifier: Modifier,
+    index: Int,
+    onClick: (Article) -> Unit,
+    onCollect: (CollectEvent) -> Unit
+) {
+    var collect by remember { mutableStateOf(article.collect) }
     Card(Modifier.padding(12.dp, 4.dp)) {
         Column(
             modifier
@@ -28,13 +35,20 @@ fun ExploreItem(article: Article, modifier: Modifier, onClick: (Article) -> Unit
                     Text(text = article.niceDate)
                 }
                 Spacer(modifier = Modifier.weight(1F))
-                FilledIconToggleButton(checked = article.collect, onCheckedChange = {
-                    onCollect(CollectEvent(article.id, article.link, it))
-                }){
-                    if (article.collect) {
-                        Icon(painter = painterResource(R.drawable.ic_collect), contentDescription = "")
+                FilledIconToggleButton(checked = collect, onCheckedChange = {
+                    onCollect(CollectEvent(index, article.id, article.link, it))
+                    collect = it
+                }) {
+                    if (collect) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_collect),
+                            contentDescription = ""
+                        )
                     } else {
-                        Icon(painter = painterResource(R.drawable.ic_un_collect), contentDescription = "")
+                        Icon(
+                            painter = painterResource(R.drawable.ic_un_collect),
+                            contentDescription = ""
+                        )
                     }
                 }
             }
