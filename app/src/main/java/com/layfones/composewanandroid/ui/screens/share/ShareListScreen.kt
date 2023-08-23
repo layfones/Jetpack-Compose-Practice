@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemsIndexed
+import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.data.services.model.CoinInfo
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.ui.components.BackButton
@@ -59,8 +59,9 @@ fun ShareListScreen(userId: String, viewModel: ShareListViewModel = hiltViewMode
         StatePage(loading = data.loadState.refresh is LoadState.Loading,data.itemCount == 0) {
             Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
                 LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
-                    itemsIndexed(data) { _, value ->
-                        PostItem(article = value!!, modifier = Modifier.clickable {
+                    items(data.itemCount, key = data.itemKey { it.id }) { index ->
+                        val article = data[index]
+                        PostItem(article = article!!, modifier = Modifier.clickable {
 
                         })
                     }

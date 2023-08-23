@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.config.KotlinCompilerVersion
+
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
@@ -9,12 +11,12 @@ plugins {
 
 android {
     namespace = "com.layfones.composewanandroid"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.layfones.composewanandroid"
-        minSdk = 24
-        targetSdk = 33
+        minSdk = 26
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -30,13 +32,24 @@ android {
             proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    // https://developer.android.com/jetpack/androidx/releases/compose-kotlin
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     packagingOptions {
@@ -45,13 +58,11 @@ android {
         }
     }
 }
-
 dependencies {
 
-    val compose_ui_version = "1.5.0"
+    val compose_ui_version = "1.5.0-beta01"
 
     implementation ("androidx.core:core-ktx:1.10.1")
-    implementation ("com.google.android.material:material:1.9.0")
     implementation ("androidx.compose.ui:ui:$compose_ui_version")
     implementation ("androidx.compose.ui:ui-tooling-preview:$compose_ui_version")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
@@ -68,19 +79,12 @@ dependencies {
     // Webkit
     implementation ("androidx.webkit:webkit:1.7.0")
     // Compose WebView
-    implementation ("com.google.accompanist:accompanist-webview:0.30.0")
+    implementation ("com.google.accompanist:accompanist-webview:0.32.0")
     // 系统 ui 控制器
-     implementation ("com.google.accompanist:accompanist-systemuicontroller:0.30.0")
-    // ViewPager
-    implementation ("com.google.accompanist:accompanist-pager:0.30.0")
-    implementation ("com.google.accompanist:accompanist-pager-indicators:0.30.0")
-    // 导航动画
-    implementation ("com.google.accompanist:accompanist-navigation-animation:0.30.0")
-    // 流式布局
-    implementation ("com.google.accompanist:accompanist-flowlayout:0.30.0")
+     implementation ("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
     //Hilt inject framework
-    implementation ("com.google.dagger:hilt-android:2.45")
-    kapt ("com.google.dagger:hilt-compiler:2.45")
+    implementation ("com.google.dagger:hilt-android:2.47")
+    kapt ("com.google.dagger:hilt-compiler:2.47")
     implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation ("androidx.navigation:navigation-compose:2.7.0")
     // Paging
@@ -88,9 +92,9 @@ dependencies {
     implementation ("androidx.paging:paging-compose:3.2.0")
     // Material3
     implementation("androidx.compose.material3:material3:1.2.0-alpha05")
-//    implementation("com.google.accompanist:accompanist-adaptive:0.26.2-beta")
+    implementation("androidx.compose.material:material:1.5.0")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
     // Datastore
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
     implementation ("androidx.preference:preference-ktx:1.2.1")
@@ -113,10 +117,10 @@ dependencies {
     testImplementation ("androidx.room:room-testing:$room_version")
 
     // For instrumentation tests
-    androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.45")
-    androidTestAnnotationProcessor ("com.google.dagger:hilt-compiler:2.45")
+    androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.47")
+    androidTestAnnotationProcessor ("com.google.dagger:hilt-compiler:2.47")
 
     // For local unit tests
-    testImplementation ("com.google.dagger:hilt-android-testing:2.45")
-    testAnnotationProcessor ("com.google.dagger:hilt-compiler:2.45")
+    testImplementation ("com.google.dagger:hilt-android-testing:2.47")
+    testAnnotationProcessor ("com.google.dagger:hilt-compiler:2.47")
 }

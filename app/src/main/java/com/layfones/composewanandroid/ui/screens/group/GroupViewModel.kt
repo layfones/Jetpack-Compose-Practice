@@ -15,6 +15,10 @@ import javax.inject.Inject
 @HiltViewModel
 class GroupViewModel @Inject constructor(private val repository: GroupRepository) : ViewModel() {
 
+    init {
+        getGroupTitle()
+    }
+
     fun getGroupTitle() {
         viewModelScope.launch {
             val titleList = repository.getAuthorTitleList()

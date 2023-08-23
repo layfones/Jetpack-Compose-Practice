@@ -8,7 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemsIndexed
+import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.data.services.model.MsgBean
 import com.layfones.composewanandroid.ui.components.MessageItem
 import com.layfones.composewanandroid.ui.components.StatePage
@@ -27,8 +27,8 @@ fun MessageList(index: Int, viewModel: MessageListViewModel = hiltViewModel()) {
         empty = messageFlow.itemCount == 0
     ) {
         LazyColumn(Modifier.fillMaxSize()) {
-            itemsIndexed(messageFlow) { _, value ->
-                MessageItem(message = value!!, modifier = Modifier)
+            items(messageFlow.itemCount, key = messageFlow.itemKey { it.id }) {index ->
+                MessageItem(message = messageFlow[index]!!, modifier = Modifier)
             }
         }
     }

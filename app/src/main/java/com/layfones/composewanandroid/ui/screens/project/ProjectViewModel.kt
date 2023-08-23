@@ -16,6 +16,10 @@ import javax.inject.Inject
 class ProjectViewModel @Inject constructor(private val repository: ProjectRepository) :
     ViewModel() {
 
+    init {
+        getProjectTitle()
+    }
+
     fun getProjectTitle() {
         viewModelScope.launch {
             val titleList = repository.getProjectTitleList()

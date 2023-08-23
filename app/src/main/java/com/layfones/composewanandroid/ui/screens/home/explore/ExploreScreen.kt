@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemsIndexed
+import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.data.services.model.Article
 import com.layfones.composewanandroid.data.services.model.Banners
 import com.layfones.composewanandroid.navigation.LocalNavController
@@ -27,8 +27,6 @@ import com.layfones.composewanandroid.ui.components.Banner
 import com.layfones.composewanandroid.ui.components.ExploreItem
 import com.layfones.composewanandroid.ui.components.StatePage
 import com.layfones.composewanandroid.ui.createAppViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -37,9 +35,7 @@ fun ExploreScreen(viewModel: ExploreViewModel = hiltViewModel()) {
 
     val appViewModel = createAppViewModel()
 
-    val viewState = remember {
-        viewModel.viewState
-    }
+    val viewState = viewModel.viewState
 
     val data = viewState.pagingDataFlow.collectAsLazyPagingItems()
     val navHostController = LocalNavController.current
@@ -67,13 +63,13 @@ fun ExploreScreen(viewModel: ExploreViewModel = hiltViewModel()) {
                         }
                     }
                 }
-                itemsIndexed(data) { index, value ->
+                items(data.itemCount) { index ->
                     if (index > 0) {
                         ExploreItem(
-                            article = value as Article,
+                            article = data[index] as Article,
                             index = index,
                             modifier = Modifier.clickable {
-                                navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")
+                                navHostController.navigate(Router.web + "/${Uri.encode((data[index] as Article).link)}")
                             },
                             onClick = {
                                 navHostController.navigate(Router.share + "/${it.userId}")

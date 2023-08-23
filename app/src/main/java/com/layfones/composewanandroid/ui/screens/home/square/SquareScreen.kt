@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemsIndexed
+import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
 import com.layfones.composewanandroid.ui.components.PostItem
@@ -39,9 +39,10 @@ fun SquareScreen(viewModel: SquareViewModel = hiltViewModel()) {
     ) {
         Box(Modifier.pullRefresh(pullRefreshState)) {
             LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
-                itemsIndexed(squareData) { _, value ->
-                    PostItem(value!!, modifier = Modifier.clickable {
-                        navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")
+                items(squareData.itemCount, key = squareData.itemKey { it.id }) { index ->
+                    val article = squareData[index]
+                    PostItem(article!!, modifier = Modifier.clickable {
+                        navHostController.navigate(Router.web + "/${Uri.encode(article.link)}")
                     })
                 }
             }

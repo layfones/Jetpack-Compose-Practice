@@ -26,7 +26,7 @@ fun StatePage(loading: Boolean, empty: Boolean, content: @Composable () -> Unit)
                 Column(Modifier.align(Alignment.Center)) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_empty),
-                        contentDescription = "没用数据",
+                        contentDescription = "没有数据",
                         Modifier
                             .align(Alignment.CenterHorizontally)
                             .size(70.dp),

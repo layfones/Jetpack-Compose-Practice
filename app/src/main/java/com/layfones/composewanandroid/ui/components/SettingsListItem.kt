@@ -2,7 +2,6 @@ package com.layfones.composewanandroid.ui.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.*
@@ -25,18 +24,19 @@ fun SettingsListItem(
                 contentDescription = ""
             )
         },
-        trailingContent = {
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowRight,
-                contentDescription = "Enter",
-                modifier = Modifier.size(24.dp),
-                tint = MaterialTheme.colorScheme.onSurface
-            )
-        },
-        headlineText = {
+        // trailingContent = {
+        //     Icon(
+        //         imageVector = Icons.Default.KeyboardArrowRight,
+        //         contentDescription = "Enter",
+        //         modifier = Modifier.size(24.dp),
+        //         tint = MaterialTheme.colorScheme.onSurface
+        //     )
+        // },
+
+        headlineContent = {
             Text(text = headlineText)
         },
-        supportingText = supportingText,
+        supportingContent = supportingText,
         modifier = modifier,
         colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surface)
     )

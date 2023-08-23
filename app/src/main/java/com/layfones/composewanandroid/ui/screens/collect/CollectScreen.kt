@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemsIndexed
+import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
 import com.layfones.composewanandroid.ui.components.BackButton
@@ -61,9 +61,10 @@ fun CollectScreen(viewModel: CollectViewModel = hiltViewModel()) {
         ) {
             Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
                 LazyColumn(Modifier.fillMaxSize()) {
-                    itemsIndexed(data) { _, value ->
-                        CollectItem(collect = value!!, modifier = Modifier.clickable {
-                            navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")
+                    items(data.itemCount, key = data.itemKey{ it.id }) { index ->
+                        val collectBean = data[index]
+                        CollectItem(collect = collectBean!!, modifier = Modifier.clickable {
+                            navHostController.navigate(Router.web + "/${Uri.encode(collectBean.link)}")
                         })
                     }
                 }

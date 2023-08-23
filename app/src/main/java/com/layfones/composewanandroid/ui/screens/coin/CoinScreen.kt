@@ -3,6 +3,7 @@ package com.layfones.composewanandroid.ui.screens.coin
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -13,7 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemsIndexed
+import androidx.paging.compose.itemKey
+import com.layfones.composewanandroid.data.services.model.CoinHistory
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.ui.components.BackButton
 import com.layfones.composewanandroid.ui.components.StatePage
@@ -69,8 +71,9 @@ fun CoinScreen(viewModel: CoinViewModel = hiltViewModel()) {
                     }
                 }
 
-                itemsIndexed(data) { _, value ->
-                    val coinHistory = value!!
+                items(data.itemCount, key = data.itemKey { it.id })
+                { index ->
+                    val coinHistory = data[index]!!
                     ListItem(
                         trailingContent = {
                             Text(
@@ -78,10 +81,10 @@ fun CoinScreen(viewModel: CoinViewModel = hiltViewModel()) {
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         },
-                        headlineText = {
+                        headlineContent = {
                             Text(text = coinHistory.reason)
                         },
-                        supportingText = { Text(text = coinHistory.desc) }
+                        supportingContent = { Text(text = coinHistory.desc) }
                     )
                 }
             }

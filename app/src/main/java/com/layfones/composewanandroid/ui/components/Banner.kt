@@ -1,11 +1,15 @@
 package com.layfones.composewanandroid.ui.components
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Icon
@@ -24,12 +28,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.google.accompanist.pager.*
 import com.layfones.composewanandroid.data.services.model.Banner
 import kotlinx.coroutines.launch
 import java.util.*
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Banner(banners: List<Banner>, modifier: Modifier = Modifier, onItemClick: (Int) -> Unit) {
     Box(
@@ -38,7 +41,7 @@ fun Banner(banners: List<Banner>, modifier: Modifier = Modifier, onItemClick: (I
     ) {
         val pageCount = banners.size
         val startIndex = Int.MAX_VALUE / 2
-        val pagerState = rememberPagerState(initialPage = startIndex)
+        val pagerState = rememberPagerState(initialPage = startIndex, pageCount = {pageCount})
         val coroutineScope = rememberCoroutineScope()
         DisposableEffect(Unit) {
             val timer = Timer()
@@ -56,9 +59,8 @@ fun Banner(banners: List<Banner>, modifier: Modifier = Modifier, onItemClick: (I
 
         HorizontalPager(
             modifier = Modifier.height(200.dp),
-            count = Int.MAX_VALUE,
             state = pagerState,
-            itemSpacing = 4.dp,
+            pageSpacing = 4.dp,
         ) { index ->
             val page = (index - startIndex).floorMod(pageCount)
             Box(
@@ -90,7 +92,7 @@ fun Banner(banners: List<Banner>, modifier: Modifier = Modifier, onItemClick: (I
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HorizontalPagerIndicator(
     pagerState: PagerState,
@@ -127,7 +129,7 @@ fun HorizontalPagerIndicator(
             Modifier
                 .offset {
                     val scrollPosition =
-                        ((pagerState.currentPage - Int.MAX_VALUE / 2).floorMod(count) + pagerState.currentPageOffset)
+                        ((pagerState.currentPage - Int.MAX_VALUE / 2).floorMod(count) + pagerState.currentPageOffsetFraction)
                             .coerceIn(
                                 0f,
                                 (count - 1)
@@ -154,7 +156,7 @@ fun Int.floorMod(other: Int): Int = when (other) {
 }
 
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ActionsRow(
     pagerState: PagerState,

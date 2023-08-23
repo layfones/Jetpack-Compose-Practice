@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemsIndexed
+import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
 import com.layfones.composewanandroid.ui.components.ProjectItem
@@ -37,9 +37,10 @@ fun ProjectList(viewModel: ProjectListViewModel) {
                 .pullRefresh(pullRefreshState)
         ) {
             LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
-                itemsIndexed(data) { _, value ->
-                    ProjectItem(value!!, Modifier.clickable {
-                        navHostController.navigate(Router.web + "/${Uri.encode(value.link)}")
+                items(data.itemCount, key = data.itemKey { it.id }) { index ->
+                    val article = data[index]
+                    ProjectItem(article!!, Modifier.clickable {
+                        navHostController.navigate(Router.web + "/${Uri.encode(article.link)}")
                     })
                 }
             }

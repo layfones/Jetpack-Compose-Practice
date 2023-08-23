@@ -9,7 +9,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import androidx.navigation.compose.rememberNavController
+// import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.ui.WanApp
@@ -22,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
                 onDispose {}
             }
             ComposeWanandroidTheme(wanAppViewModel.theme) {
-                val navController = rememberAnimatedNavController()
+                val navController = rememberNavController ()
                 CompositionLocalProvider(LocalNavController provides navController) {
                     WanApp(navController)
                 }

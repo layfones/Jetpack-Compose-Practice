@@ -3,8 +3,11 @@ package com.layfones.composewanandroid.ui
 import android.annotation.SuppressLint
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Email
@@ -24,9 +27,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import com.layfones.composewanandroid.R
 import com.layfones.composewanandroid.ui.screens.group.GroupScreen
 import com.layfones.composewanandroid.ui.screens.home.HomeScreen
@@ -35,12 +35,11 @@ import com.layfones.composewanandroid.ui.screens.profile.ProfileScreen
 import com.layfones.composewanandroid.ui.screens.project.ProjectScreen
 import kotlinx.coroutines.launch
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainScaffold() {
 
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = {MainScreen.values().size})
     val scope = rememberCoroutineScope()
     var selectedScreen by remember { mutableStateOf(0) }
 
@@ -59,7 +58,6 @@ fun MainScaffold() {
                 })
         }) {
         HorizontalPager(
-            count = MainScreen.values().size,
             state = pagerState,
             userScrollEnabled = false,
             contentPadding = it

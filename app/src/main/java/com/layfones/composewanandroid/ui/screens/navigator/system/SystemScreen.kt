@@ -1,6 +1,9 @@
 package com.layfones.composewanandroid.ui.screens.navigator.system
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,11 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.flowlayout.FlowRow
 import com.layfones.composewanandroid.ui.components.ListItemHeader
 import com.layfones.composewanandroid.ui.components.StatePage
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun SystemScreen(viewModel: SystemViewModel = hiltViewModel()) {
     val viewState = viewModel.viewState
@@ -25,9 +27,8 @@ fun SystemScreen(viewModel: SystemViewModel = hiltViewModel()) {
                 }
                 item(key = value.name) {
                     FlowRow(
-                        mainAxisSpacing = 12.dp,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier.padding(12.dp, 10.dp),
-                        crossAxisSpacing = 1.dp
                     ) {
                         value.children.forEachIndexed { _, classify ->
                             TextButton(
