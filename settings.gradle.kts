@@ -13,6 +13,11 @@ dependencyResolutionManagement {
         mavenCentral()
         maven("https://www.jitpack.io")
     }
+    // versionCatalogs {
+    //     create("depLibs") {
+    //         from(files("./gradle/libs.versions.toml"))
+    //     }
+    // }
 }
 rootProject.name = "ComposeWanandroid"
 include(":app")

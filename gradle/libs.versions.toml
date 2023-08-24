@@ -1,8 +1,82 @@
 [versions]
+agp = "8.1.0"
+kotlin = "1.9.0"
+hilt = "2.47"
+#noinspection GradleDependency
+compose = "1.5.0-beta01"
+ksp = "1.9.0-1.0.11"
+room = "2.5.2"
+paging = "3.2.0"
+okhttp = "4.11.0"
+retrofit = "2.9.0"
+accompanist = "0.32.0"
+junit4 = "4.13.2"
+espresso = "3.5.1"
 
 [libraries]
+androidx-core-ktx = "androidx.core:core-ktx:1.10.1"
+androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+androidx-activity-compose = "androidx.activity:activity-compose:1.7.2"
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+androidx-compose-tooling = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+# Datastore
+androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
+androidx-preference = "androidx.preference:preference-ktx:1.2.1"
+
+coil-compose = "io.coil-kt:coil-compose:2.4.0"
+webkit = "androidx.webkit:webkit:1.7.0"
+
+accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanist" }
+accompanist-systemui-controller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+
+navigation-compose = "androidx.navigation:navigation-compose:2.7.0"
+compose-material3 = "androidx.compose.material3:material3:1.2.0-alpha05"
+compose-material = "androidx.compose.material:material:1.5.0"
+
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = "androidx.hilt:hilt-navigation-compose:1.0.0"
+
+paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging" }
+paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
+
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+
+kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
+
+junit4 = { module = "junit:junit", version.ref = "junit4" }
+test-ext = "androidx.test.ext:junit:1.1.5"
+test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
+compose-ui-test = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 
 [plugins]
+android-applicaiton = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
+androidx = ["androidx-core-ktx", "androidx-lifecycle-runtime", "androidx-activity-compose",
+    "androidx-compose-ui", "androidx-compose-tooling", "androidx-datastore", "androidx-preference"]
+room = ["room-runtime", "room-ktx", "room-paging"]
+paging = ["paging-runtime-ktx", "paging-compose"]
+okhttp = ["okhttp", "okhttp-logging"]
+retrofit = ["retrofit", "retrofit-gson"]
+accompanist = ["accompanist-webview", "accompanist-systemui-controller"]
 

@@ -1,12 +1,10 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")
-    id ("kotlin-kapt")
-    id ("dagger.hilt.android.plugin")
-    id ("kotlin-parcelize")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.android.applicaiton)
+    alias(libs.plugins.kotlin.android)
+    kotlin("kapt")
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -52,7 +50,7 @@ android {
         buildConfig = true
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -60,67 +58,55 @@ android {
 }
 dependencies {
 
-    val compose_ui_version = "1.5.0-beta01"
-
-    implementation ("androidx.core:core-ktx:1.10.1")
-    implementation ("androidx.compose.ui:ui:$compose_ui_version")
-    implementation ("androidx.compose.ui:ui-tooling-preview:$compose_ui_version")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation ("androidx.activity:activity-compose:1.7.2")
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:$compose_ui_version")
-    debugImplementation ("androidx.compose.ui:ui-tooling:$compose_ui_version")
-    debugImplementation ("androidx.compose.ui:ui-test-manifest:$compose_ui_version")
+    implementation(libs.bundles.androidx)
 
     // Coil 图片加载
-    implementation ("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.coil.compose)
+
     // Webkit
-    implementation ("androidx.webkit:webkit:1.7.0")
+    implementation(libs.webkit)
+
     // Compose WebView
-    implementation ("com.google.accompanist:accompanist-webview:0.32.0")
     // 系统 ui 控制器
-     implementation ("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+    implementation(libs.bundles.accompanist)
+
     //Hilt inject framework
-    implementation ("com.google.dagger:hilt-android:2.47")
-    kapt ("com.google.dagger:hilt-compiler:2.47")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation ("androidx.navigation:navigation-compose:2.7.0")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+
     // Paging
-    implementation ("androidx.paging:paging-runtime-ktx:3.2.0")
-    implementation ("androidx.paging:paging-compose:3.2.0")
-    // Material3
-    implementation("androidx.compose.material3:material3:1.2.0-alpha05")
-    implementation("androidx.compose.material:material:1.5.0")
+    implementation(libs.bundles.paging)
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-    // Datastore
-    implementation ("androidx.datastore:datastore-preferences:1.0.0")
-    implementation ("androidx.preference:preference-ktx:1.2.1")
+    implementation(libs.navigation.compose)
+
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material)
+
+    implementation(libs.kotlinx.serialization.json)
+
     // OkHttp
-    implementation ("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
-    // Retrofit2
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.bundles.okhttp)
 
-    //room数据库
-    val room_version = "2.5.2"
-    implementation ("androidx.room:room-runtime:$room_version")
-    ksp  ("androidx.room:room-compiler:$room_version")
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation ("androidx.room:room-ktx:$room_version")
-    // optional - Paging 3 Integration
-    implementation ("androidx.room:room-paging:$room_version")
-    // Test helpers
-    testImplementation ("androidx.room:room-testing:$room_version")
+    // Retrofit2
+    implementation(libs.bundles.retrofit)
+
+    implementation(libs.bundles.room)
+    ksp(libs.room.compiler)
+
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.test.ext)
+    androidTestImplementation(libs.test.espresso)
+
+    androidTestImplementation(libs.compose.ui.test)
+    androidTestImplementation(libs.compose.ui.test.manifest)
+    debugImplementation (libs.compose.ui.tooling)
 
     // For instrumentation tests
-    androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.47")
-    androidTestAnnotationProcessor ("com.google.dagger:hilt-compiler:2.47")
+    androidTestImplementation (libs.hilt.android.testing)
+    androidTestAnnotationProcessor(libs.hilt.compiler)
 
     // For local unit tests
-    testImplementation ("com.google.dagger:hilt-android-testing:2.47")
-    testAnnotationProcessor ("com.google.dagger:hilt-compiler:2.47")
+    testImplementation(libs.hilt.android.testing)
+    testAnnotationProcessor(libs.hilt.compiler)
 }
