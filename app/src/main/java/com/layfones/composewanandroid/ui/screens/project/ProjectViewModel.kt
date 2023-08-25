@@ -20,7 +20,7 @@ class ProjectViewModel @Inject constructor(private val repository: ProjectReposi
         getProjectTitle()
     }
 
-    fun getProjectTitle() {
+    private fun getProjectTitle() {
         viewModelScope.launch {
             val titleList = repository.getProjectTitleList()
             val titles = titleList.getOrNull() ?: emptyList()

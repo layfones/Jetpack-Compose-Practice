@@ -19,7 +19,7 @@ class GroupViewModel @Inject constructor(private val repository: GroupRepository
         getGroupTitle()
     }
 
-    fun getGroupTitle() {
+    private fun getGroupTitle() {
         viewModelScope.launch {
             val titleList = repository.getAuthorTitleList()
             val titles = titleList.getOrNull() ?: emptyList()

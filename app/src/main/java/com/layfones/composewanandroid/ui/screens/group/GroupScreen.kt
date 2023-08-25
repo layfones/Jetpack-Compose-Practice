@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.layfones.composewanandroid.ui.components.WanScrollableTabRow
 
 import kotlinx.coroutines.launch
 
@@ -29,34 +30,7 @@ fun GroupScreen(groupViewModel: GroupViewModel = hiltViewModel()) {
     if (titleData.isNotEmpty()) {
         Column {
             val pagerState = rememberPagerState(pageCount = {titleData.size})
-            val scope = rememberCoroutineScope()
-            ScrollableTabRow(
-                selectedTabIndex = pagerState.currentPage,
-                edgePadding = 2.dp,
-                indicator = { tabPositions ->
-                    Box(
-                        modifier = Modifier
-                            .tabIndicatorOffset(tabPositions[pagerState.currentPage])
-                            .height(3.dp)
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp))
-                            .background(MaterialTheme.colorScheme.primary)
-                    )
-                },
-                containerColor = MaterialTheme.colorScheme.background
-            ) {
-                titleData.forEachIndexed { index, title ->
-                    Tab(
-                        text = { Text(title.name, style = MaterialTheme.typography.titleMedium.copy(MaterialTheme.colorScheme.primary)) },
-                        selected = pagerState.currentPage == index,
-                        onClick = {
-                            scope.launch {
-                                pagerState.animateScrollToPage(index)
-                            }
-                        },
-                    )
-                }
-            }
+            WanScrollableTabRow(pagerState = pagerState, titles = titleData.map { it.name })
             HorizontalPager(
                 state = pagerState,
             ) { page ->
