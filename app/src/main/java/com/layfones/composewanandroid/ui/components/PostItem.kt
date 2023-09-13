@@ -1,6 +1,7 @@
 package com.layfones.composewanandroid.ui.components
 
 import android.text.Html
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -13,12 +14,15 @@ import androidx.core.text.HtmlCompat
 import com.layfones.composewanandroid.data.services.model.Article
 
 @Composable
-fun PostItem(article: Article, modifier: Modifier) {
+fun PostItem(article: Article, modifier: Modifier = Modifier, onItemClick: (Article)->Unit) {
     Card(Modifier.padding(12.dp, 4.dp)) {
         Column(
             modifier
-                .padding(16.dp)
                 .fillMaxSize()
+                .padding(16.dp)
+                .clickable {
+                    onItemClick(article)
+                }
         ) {
             Row() {
                 Text(text = article.getArticleAuthor())

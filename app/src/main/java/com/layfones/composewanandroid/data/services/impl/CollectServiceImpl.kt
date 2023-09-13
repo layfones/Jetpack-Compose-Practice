@@ -10,8 +10,8 @@ class CollectServiceImpl @Inject constructor() : CollectService {
 
     override suspend fun getCollectList(page: Int) = service.getCollectList(page)
 
-    override suspend fun collectArticle(id: Int) = service.collectArticle(id)
+    override suspend fun collectArticle(id: Long) = service.collectArticle(id)
 
-    override suspend fun unCollectArticle(id: Int) = service.unCollectArticle(id)
+    override suspend fun unCollectArticle(id: Long) = service.unCollectArticle(id)
 
 }

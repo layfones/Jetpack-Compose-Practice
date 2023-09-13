@@ -1,7 +1,6 @@
 package com.layfones.composewanandroid.ui.screens.group
 
 import android.net.Uri
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,23 +29,18 @@ fun GroupList(viewModel: GroupListViewModel) {
     val pullRefreshState =
         rememberPullRefreshState(refreshing = refreshing, onRefresh = { data.refresh() })
     StatePage(loading = data.loadState.refresh is LoadState.Loading, data.itemCount == 0) {
-        Box(
-            Modifier
-                .pullRefresh(pullRefreshState)
-        ) {
+        Box(Modifier.pullRefresh(pullRefreshState)) {
             LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
                 items(data.itemCount, key = data.itemKey { it.id }) { index ->
                     val article = data[index]
-                    PostItem(article!!, Modifier.clickable {
-                        navHostController.navigate(Router.web + "/${Uri.encode(article.link)}")
+                    PostItem(article!!, onItemClick = { item ->
+                        navHostController.navigate(Router.web + "/${Uri.encode(item.link)}")
                     })
                 }
             }
-            PullRefreshIndicator(
-                refreshing = refreshing, state = pullRefreshState, Modifier.align(
-                    Alignment.TopCenter
-                )
-            )
+            PullRefreshIndicator(refreshing = refreshing,
+                state = pullRefreshState,
+                Modifier.align(Alignment.TopCenter))
         }
     }
 }

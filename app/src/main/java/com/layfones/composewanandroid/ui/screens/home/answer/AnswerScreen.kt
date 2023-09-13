@@ -1,11 +1,10 @@
 package com.layfones.composewanandroid.ui.screens.home.answer
 
+// noinspection UsingMaterialAndMaterial3Libraries
 import android.net.Uri
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -36,8 +35,8 @@ fun AnswerScreen(viewModel: AnswerViewModel = hiltViewModel()) {
             LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
                 items(data.itemCount, key = data.itemKey { it.id }) { index ->
                     val article = data[index]
-                    PostItem(article = article!!, modifier = Modifier.clickable {
-                        navHostController.navigate(Router.web + "/${Uri.encode(article.link)}")
+                    PostItem(article = article!!, onItemClick = { item ->
+                        navHostController.navigate(Router.web + "/${Uri.encode(item.link)}")
                     })
                 }
             }

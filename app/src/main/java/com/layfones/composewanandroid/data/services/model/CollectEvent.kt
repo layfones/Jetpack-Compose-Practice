@@ -5,7 +5,7 @@ package com.layfones.composewanandroid.data.services.model
  */
 data class CollectEvent(
     val index: Int,
-    val id: Int,
+    val id: Long,
     val link: String,
     val isCollected: Boolean
 )

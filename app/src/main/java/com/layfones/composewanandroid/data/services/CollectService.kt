@@ -20,15 +20,15 @@ interface CollectService : BaseService {
      * 收藏站内文章
      */
     @POST("lg/collect/{id}/json")
-    suspend fun collectArticle(@Path("id") id: Int): NetworkResponse<Any>
+    suspend fun collectArticle(@Path("id") id: Long): NetworkResponse<Any>
 
     /**
      * 取消收藏站内文章
      */
     @POST("lg/uncollect_originId/{id}/json")
-    suspend fun unCollectArticle(@Path("id") id: Int): NetworkResponse<Any>
+    suspend fun unCollectArticle(@Path("id") id: Long): NetworkResponse<Any>
 
-    suspend fun isCollectArticle(collect: Boolean, id: Int) =
+    suspend fun isCollectArticle(collect: Boolean, id: Long) =
         if (collect) collectArticle(id) else unCollectArticle(id)
 
 }
