@@ -19,6 +19,7 @@ androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
 androidx-activity-compose = "androidx.activity:activity-compose:1.7.2"
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 androidx-compose-tooling = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+androidx-compose-android = { module = "androidx.compose.ui:ui-android", version.ref = "compose" }
 # Datastore
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 androidx-preference = "androidx.preference:preference-ktx:1.2.1"
