@@ -1,6 +1,7 @@
 package com.layfones.composewanandroid.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -23,7 +24,8 @@ fun TutorialItem(tutorial: Classify) {
                 modifier = Modifier
                     .width(72.dp)
                     .height(100.dp)
-                    .align(Alignment.CenterVertically)
+                    .align(Alignment.CenterVertically),
+                shape = RoundedCornerShape(6.dp)
             ) {
                 AsyncImage(
                     model = tutorial.cover,

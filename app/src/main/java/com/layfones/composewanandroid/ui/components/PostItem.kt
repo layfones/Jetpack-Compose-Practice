@@ -18,11 +18,11 @@ fun PostItem(article: Article, modifier: Modifier = Modifier, onItemClick: (Arti
     Card(Modifier.padding(12.dp, 4.dp)) {
         Column(
             modifier
-                .fillMaxSize()
-                .padding(16.dp)
                 .clickable {
                     onItemClick(article)
                 }
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
             Row() {
                 Text(text = article.getArticleAuthor())

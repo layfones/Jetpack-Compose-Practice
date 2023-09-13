@@ -35,11 +35,12 @@ fun ExploreItem(article: Article,
     var collect by remember { mutableStateOf(article.collect) }
     Card(Modifier.padding(12.dp, 4.dp)) {
         Column(modifier
-            .padding(16.dp)
-            .fillMaxSize()
             .clickable {
                 onItemClick(article)
             }
+            .padding(16.dp)
+            .fillMaxSize()
+
         ) {
             Row() {
                 Column() {
