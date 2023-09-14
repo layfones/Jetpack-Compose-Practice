@@ -12,18 +12,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.layfones.composewanandroid.ui.components.ListItemHeader
-import com.layfones.composewanandroid.ui.components.StatePage
+import com.layfones.composewanandroid.ui.components.WanListItemHeader
+import com.layfones.composewanandroid.ui.components.WanStatePage
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun SystemScreen(viewModel: SystemViewModel = hiltViewModel()) {
     val viewState = viewModel.viewState
-    StatePage(loading = viewState.list.isEmpty(), empty = viewState.list.isEmpty()) {
+    WanStatePage(loading = viewState.list.isEmpty(), empty = viewState.list.isEmpty()) {
         LazyColumn(modifier = Modifier.fillMaxSize(), state = viewState.listState) {
             viewState.list.forEachIndexed { _, value ->
                 stickyHeader(key = value.name + "_sys_header") {
-                    ListItemHeader(title = value.name)
+                    WanListItemHeader(title = value.name)
                 }
                 item(key = value.name) {
                     FlowRow(

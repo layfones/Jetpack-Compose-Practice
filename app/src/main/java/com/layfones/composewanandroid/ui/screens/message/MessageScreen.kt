@@ -9,13 +9,12 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.layfones.composewanandroid.navigation.LocalNavController
-import com.layfones.composewanandroid.ui.components.BackButton
+import com.layfones.composewanandroid.ui.components.WanBackButton
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -32,7 +31,7 @@ fun MessageScreen(viewModel: MessageViewModel = hiltViewModel()) {
 
         Column(Modifier.fillMaxSize()) {
             Box(modifier = Modifier.fillMaxWidth()) {
-                BackButton {
+                WanBackButton {
                     navHostController.popBackStack()
                 }
                 WanTabRow(

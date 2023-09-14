@@ -21,9 +21,9 @@ import com.layfones.composewanandroid.data.services.model.Article
 import com.layfones.composewanandroid.data.services.model.Banners
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
-import com.layfones.composewanandroid.ui.components.Banner
-import com.layfones.composewanandroid.ui.components.ExploreItem
-import com.layfones.composewanandroid.ui.components.StatePage
+import com.layfones.composewanandroid.ui.components.WanBanner
+import com.layfones.composewanandroid.ui.components.WanExploreItem
+import com.layfones.composewanandroid.ui.components.WanStatePage
 import com.layfones.composewanandroid.ui.createAppViewModel
 
 
@@ -48,14 +48,14 @@ fun ExploreScreen(viewModel: ExploreViewModel = hiltViewModel()) {
     }
 
 
-    StatePage(loading = data.loadState.refresh is LoadState.Loading, empty = data.itemCount == 0) {
+    WanStatePage(loading = data.loadState.refresh is LoadState.Loading, empty = data.itemCount == 0) {
         Box(Modifier.pullRefresh(pullRefreshState)) {
             if (data.itemCount > 0) {
                 LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
                     item {
                         Card(modifier = Modifier.padding(12.dp, 4.dp)) {
                             val banners: Banners = data[0] as Banners
-                            Banner(banners.banners, onItemClick = { itemIndex ->
+                            WanBanner(banners.banners, onItemClick = { itemIndex ->
                                 navHostController.navigate(Router.web + "/${Uri.encode(banners.banners[itemIndex].url)}")
                             })
 
@@ -64,7 +64,7 @@ fun ExploreScreen(viewModel: ExploreViewModel = hiltViewModel()) {
                     if (data.itemCount > 1) {
                         items(data.itemCount) { index ->
                             if (index >= 1) {
-                                ExploreItem(article = data[index] as Article,
+                                WanExploreItem(article = data[index] as Article,
                                     index = index,
                                     onItemClick = { article ->
                                         navHostController.navigate(Router.web + "/${Uri.encode(article.link)}")

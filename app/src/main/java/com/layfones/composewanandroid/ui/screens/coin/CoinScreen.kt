@@ -3,7 +3,6 @@ package com.layfones.composewanandroid.ui.screens.coin
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,10 +14,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
-import com.layfones.composewanandroid.data.services.model.CoinHistory
 import com.layfones.composewanandroid.navigation.LocalNavController
-import com.layfones.composewanandroid.ui.components.BackButton
-import com.layfones.composewanandroid.ui.components.StatePage
+import com.layfones.composewanandroid.ui.components.WanBackButton
+import com.layfones.composewanandroid.ui.components.WanStatePage
 
 @Composable
 fun CoinScreen(viewModel: CoinViewModel = hiltViewModel()) {
@@ -36,7 +34,7 @@ fun CoinScreen(viewModel: CoinViewModel = hiltViewModel()) {
             Modifier
                 .fillMaxWidth()
         ) {
-            BackButton {
+            WanBackButton {
                 navHostController.popBackStack()
             }
             androidx.compose.material.Text(
@@ -46,7 +44,7 @@ fun CoinScreen(viewModel: CoinViewModel = hiltViewModel()) {
             )
         }
 
-        StatePage(
+        WanStatePage(
             loading = data.loadState.refresh is LoadState.Loading,
             empty = data.itemCount == 0
         ) {

@@ -1,6 +1,5 @@
 package com.layfones.composewanandroid.ui.components
 
-import android.text.Html
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.layfones.composewanandroid.data.services.model.MsgBean
 
 @Composable
-fun MessageItem(message: MsgBean, modifier: Modifier) {
+fun WanMessageItem(message: MsgBean, modifier: Modifier) {
     Card(Modifier.padding(horizontal = 12.dp, vertical = 4.dp)) {
         Column(
             modifier

@@ -21,9 +21,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
-import com.layfones.composewanandroid.ui.components.BackButton
+import com.layfones.composewanandroid.ui.components.WanBackButton
 import com.layfones.composewanandroid.ui.components.CollectItem
-import com.layfones.composewanandroid.ui.components.StatePage
+import com.layfones.composewanandroid.ui.components.WanStatePage
 
 @OptIn(ExperimentalMaterialApi::class)
 @Preview
@@ -45,7 +45,7 @@ fun CollectScreen(viewModel: CollectViewModel = hiltViewModel()) {
             Modifier
                 .fillMaxWidth()
         ) {
-            BackButton {
+            WanBackButton {
                 navHostController.popBackStack()
             }
             Text(
@@ -55,7 +55,7 @@ fun CollectScreen(viewModel: CollectViewModel = hiltViewModel()) {
             )
         }
 
-        StatePage(
+        WanStatePage(
             loading = data.loadState.refresh is LoadState.Loading,
             empty = data.itemCount == 0
         ) {

@@ -10,8 +10,8 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.data.services.model.MsgBean
-import com.layfones.composewanandroid.ui.components.MessageItem
-import com.layfones.composewanandroid.ui.components.StatePage
+import com.layfones.composewanandroid.ui.components.WanMessageItem
+import com.layfones.composewanandroid.ui.components.WanStatePage
 
 @Composable
 fun MessageList(index: Int, viewModel: MessageListViewModel = hiltViewModel()) {
@@ -22,13 +22,13 @@ fun MessageList(index: Int, viewModel: MessageListViewModel = hiltViewModel()) {
         viewModel.getReadiedMsgFlow.collectAsLazyPagingItems()
     }
 
-    StatePage(
+    WanStatePage(
         loading = messageFlow.loadState.refresh is LoadState.Loading,
         empty = messageFlow.itemCount == 0
     ) {
         LazyColumn(Modifier.fillMaxSize()) {
             items(messageFlow.itemCount, key = messageFlow.itemKey { it.id }) {index ->
-                MessageItem(message = messageFlow[index]!!, modifier = Modifier)
+                WanMessageItem(message = messageFlow[index]!!, modifier = Modifier)
             }
         }
     }

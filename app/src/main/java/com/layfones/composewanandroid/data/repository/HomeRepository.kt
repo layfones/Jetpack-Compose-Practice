@@ -1,25 +1,38 @@
 package com.layfones.composewanandroid.data.repository
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.room.Room
+import com.layfones.composewanandroid.App
 import com.layfones.composewanandroid.common.IntKeyPagingSource
 import com.layfones.composewanandroid.common.http.adapter.getOrElse
 import com.layfones.composewanandroid.common.http.adapter.getOrNull
+import com.layfones.composewanandroid.data.database.WanDatabase
 import com.layfones.composewanandroid.data.services.BaseService
 import com.layfones.composewanandroid.data.services.HomeService
+import com.layfones.composewanandroid.data.services.model.Article
 import com.layfones.composewanandroid.data.services.model.Banners
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor(private val service: HomeService) {
+
+    private var database: WanDatabase = Room.databaseBuilder(App.app,
+        WanDatabase::class.java,
+        "app_database")
+        .allowMainThreadQueries()
+        .build()
 
     private suspend fun getBanner() = service.getBanner()
 
     private suspend fun getArticleTopList() = service.getArticleTopList()
 
     fun getArticlePageList(pageSize: Int) = Pager(
-        PagingConfig(
+        config =  PagingConfig(
             pageSize = pageSize,
             initialLoadSize = pageSize,
             enablePlaceholders = false
@@ -67,6 +80,19 @@ class HomeRepository @Inject constructor(private val service: HomeService) {
             service.getSquarePageList(page, size).getOrNull()?.datas ?: emptyList()
         }
     }.flow
+
+    @OptIn(ExperimentalPagingApi::class)
+    fun getSquarePageList2(pageSize: Int) = Pager(
+        config =  PagingConfig(
+            pageSize = pageSize,
+            initialLoadSize = pageSize,
+            enablePlaceholders = false
+        ), remoteMediator = HomeRemoteMediator(service, database)
+    ) {
+        database.articleDao().getAll()
+    }.flow
+
+
 
     fun getAnswerPageList() =
         Pager(

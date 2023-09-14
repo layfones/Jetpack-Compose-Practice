@@ -2,7 +2,6 @@ package com.layfones.composewanandroid.ui.screens.share
 
 import android.net.Uri
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
@@ -23,9 +22,9 @@ import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.data.services.model.CoinInfo
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
-import com.layfones.composewanandroid.ui.components.BackButton
-import com.layfones.composewanandroid.ui.components.PostItem
-import com.layfones.composewanandroid.ui.components.StatePage
+import com.layfones.composewanandroid.ui.components.WanBackButton
+import com.layfones.composewanandroid.ui.components.WanPostItem
+import com.layfones.composewanandroid.ui.components.WanStatePage
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -52,18 +51,18 @@ fun ShareListScreen(userId: String, viewModel: ShareListViewModel = hiltViewMode
             Modifier
                 .fillMaxWidth()
         ) {
-            BackButton {
+            WanBackButton {
                 navHostController.popBackStack()
             }
             Text(text = "分享文章"+info.value.nickname, Modifier.align(Alignment.Center), style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.primary))
         }
 
-        StatePage(loading = data.loadState.refresh is LoadState.Loading,data.itemCount == 0) {
+        WanStatePage(loading = data.loadState.refresh is LoadState.Loading,data.itemCount == 0) {
             Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
                 LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
                     items(data.itemCount, key = data.itemKey { it.id }) { index ->
                         val article = data[index]
-                        PostItem(article = article!!, onItemClick = { item ->
+                        WanPostItem(article = article!!, onItemClick = { item ->
                             navHostController.navigate(Router.web + "/${Uri.encode(item.link)}")
                         })
                     }

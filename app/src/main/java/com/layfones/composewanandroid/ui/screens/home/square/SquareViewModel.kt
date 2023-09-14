@@ -12,6 +12,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.layfones.composewanandroid.common.IntKeyPagingSource
 import com.layfones.composewanandroid.common.http.adapter.getOrNull
+import com.layfones.composewanandroid.data.repository.HomeRepository
 import com.layfones.composewanandroid.data.services.BaseService
 import com.layfones.composewanandroid.data.services.HomeService
 import com.layfones.composewanandroid.data.services.model.Article
@@ -20,20 +21,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class SquareViewModel @Inject constructor(val service: HomeService) : ViewModel() {
+class SquareViewModel @Inject constructor(val repository: HomeRepository) : ViewModel() {
 
-    private val pagingDataFlow by lazy {
-        Pager(PagingConfig(pageSize = 10, initialLoadSize = 10, enablePlaceholders = false)) {
-            IntKeyPagingSource(
-                BaseService.DEFAULT_PAGE_START_NO,
-                service = service
-            ) { service, page, size ->
-                service.getSquarePageList(page, size).getOrNull()?.datas ?: emptyList()
-            }
-        }.flow.cachedIn(viewModelScope)
-    }
-
-    var viewState by mutableStateOf(SquareViewState(pagingData = pagingDataFlow))
+    var viewState by mutableStateOf(SquareViewState(pagingData = repository.getSquarePageList(20).cachedIn(viewModelScope)))
         private set
 }
 

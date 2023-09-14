@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -37,8 +36,8 @@ import com.layfones.composewanandroid.account.checkLogin
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
 import com.layfones.composewanandroid.ui.WanAppViewModel
-import com.layfones.composewanandroid.ui.components.ListItemHeader
-import com.layfones.composewanandroid.ui.components.SettingsListItem
+import com.layfones.composewanandroid.ui.components.WanListItemHeader
+import com.layfones.composewanandroid.ui.components.WanSettingsListItem
 import com.layfones.composewanandroid.ui.createAppViewModel
 import com.layfones.composewanandroid.ui.theme.WanandroidTheme
 
@@ -79,29 +78,29 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
             }
         }
         item {
-            ListItemHeader(title = "个人中心")
-            SettingsListItem(headlineText = "我的积分",
+            WanListItemHeader(title = "个人中心")
+            WanSettingsListItem(headlineText = "我的积分",
                 leadingIcon = R.drawable.ic_star,
                 modifier = Modifier.clickable {
                     viewModel.accountState.value.checkLogin(navHostController) {
                         navHostController.navigate(Router.coin)
                     }
                 })
-            SettingsListItem(headlineText = "消息中心",
+            WanSettingsListItem(headlineText = "消息中心",
                 leadingIcon = R.drawable.ic_message,
                 modifier = Modifier.clickable {
                     viewModel.accountState.value.checkLogin(navHostController) {
                         navHostController.navigate(Router.message)
                     }
                 })
-            SettingsListItem(headlineText = "分享文章",
+            WanSettingsListItem(headlineText = "分享文章",
                 leadingIcon = R.drawable.ic_share,
                 modifier = Modifier.clickable {
                     viewModel.accountState.value.checkLogin(navHostController) {
                         navHostController.navigate(Router.share + "/" + userBaseInfo.userInfo.id)
                     }
                 })
-            SettingsListItem(headlineText = "收藏文章",
+            WanSettingsListItem(headlineText = "收藏文章",
                 leadingIcon = R.drawable.ic_collect,
                 modifier = Modifier.clickable {
                     viewModel.accountState.value.checkLogin(navHostController) {
@@ -110,10 +109,10 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                 })
         }
         item {
-            ListItemHeader(title = "设置")
+            WanListItemHeader(title = "设置")
             Box {
                 var expanded by remember { mutableStateOf(false) }
-                SettingsListItem(headlineText = "深色模式",
+                WanSettingsListItem(headlineText = "深色模式",
                     leadingIcon = R.drawable.ic_bedtime,
                     modifier = Modifier.clickable {
                         expanded = true
@@ -148,13 +147,13 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                             theme = WanandroidTheme.LIGHT)))
                 }
             }
-            SettingsListItem(headlineText = "源代码",
+            WanSettingsListItem(headlineText = "源代码",
                 leadingIcon = R.drawable.ic_code,
                 modifier = Modifier.clickable {
                     navHostController.navigate(Router.web + "/${Uri.encode(viewModel.github)}")
                 },
                 supportingText = { Text(text = viewModel.github) })
-            SettingsListItem(headlineText = "关于",
+            WanSettingsListItem(headlineText = "关于",
                 leadingIcon = R.drawable.ic_memory,
                 modifier = Modifier.clickable {},
                 supportingText = { Text(text = "version 1.0") })

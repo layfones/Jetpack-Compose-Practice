@@ -16,8 +16,8 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.navigation.LocalNavController
 import com.layfones.composewanandroid.navigation.Router
-import com.layfones.composewanandroid.ui.components.PostItem
-import com.layfones.composewanandroid.ui.components.StatePage
+import com.layfones.composewanandroid.ui.components.WanPostItem
+import com.layfones.composewanandroid.ui.components.WanStatePage
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -28,12 +28,12 @@ fun GroupList(viewModel: GroupListViewModel) {
     val refreshing = data.loadState.refresh is LoadState.Loading && data.itemCount > 0
     val pullRefreshState =
         rememberPullRefreshState(refreshing = refreshing, onRefresh = { data.refresh() })
-    StatePage(loading = data.loadState.refresh is LoadState.Loading, data.itemCount == 0) {
+    WanStatePage(loading = data.loadState.refresh is LoadState.Loading, data.itemCount == 0) {
         Box(Modifier.pullRefresh(pullRefreshState)) {
             LazyColumn(Modifier.fillMaxSize(), state = viewState.listState) {
                 items(data.itemCount, key = data.itemKey { it.id }) { index ->
                     val article = data[index]
-                    PostItem(article!!, onItemClick = { item ->
+                    WanPostItem(article!!, onItemClick = { item ->
                         navHostController.navigate(Router.web + "/${Uri.encode(item.link)}")
                     })
                 }

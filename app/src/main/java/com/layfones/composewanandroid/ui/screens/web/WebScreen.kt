@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.web.*
 import com.layfones.composewanandroid.navigation.LocalNavController
-import com.layfones.composewanandroid.ui.components.BackButton
+import com.layfones.composewanandroid.ui.components.WanBackButton
 import com.layfones.composewanandroid.util.WebViewManager
 import com.layfones.composewanandroid.util.injectVConsoleJs
 
@@ -92,7 +92,7 @@ fun WebScreen(
             Modifier
                 .fillMaxWidth()
         ) {
-            BackButton {
+            WanBackButton {
                 navHostController.popBackStack()
             }
             Text(

@@ -26,12 +26,12 @@ import com.layfones.composewanandroid.data.services.model.Article
 import com.layfones.composewanandroid.data.services.model.CollectEvent
 
 @Composable
-fun ExploreItem(article: Article,
-                index: Int,
-                modifier: Modifier = Modifier,
-                onItemClick: (Article) -> Unit,
-                onAuthorNameClick: (Long) -> Unit,
-                onCollectionClick: (CollectEvent) -> Unit) {
+fun WanExploreItem(article: Article,
+                   index: Int,
+                   modifier: Modifier = Modifier,
+                   onItemClick: (Article) -> Unit,
+                   onAuthorNameClick: (Long) -> Unit,
+                   onCollectionClick: (CollectEvent) -> Unit) {
     var collect by remember { mutableStateOf(article.collect) }
     Card(Modifier.padding(12.dp, 4.dp)) {
         Column(modifier

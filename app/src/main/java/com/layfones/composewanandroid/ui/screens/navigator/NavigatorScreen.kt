@@ -39,31 +39,6 @@ fun NavigatorScreen() {
                 .width(201.dp)
                 .height(48.dp)
         )
-        // val scope = rememberCoroutineScope()
-        // TabRow(selectedTabIndex = pagerState.currentPage,modifier = Modifier
-        //     .align(Alignment.CenterHorizontally)
-        //     .width(201.dp)
-        //     .height(48.dp), indicator = { tabPositions ->
-        //     Box(
-        //         modifier = Modifier
-        //             .tabIndicatorOffset(tabPositions[pagerState.currentPage])
-        //             .height(3.dp)
-        //             .clip(RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp))
-        //             .background(MaterialTheme.colorScheme.primary)
-        //     )
-        // }) {
-        //     titles.forEachIndexed { index, title ->
-        //         Tab(
-        //             selected = pagerState.currentPage == index,
-        //             onClick = {
-        //                 scope.launch {
-        //                     pagerState.animateScrollToPage(index)
-        //                 }
-        //             },
-        //             text = { Text(text = title, style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.primary)) },
-        //         )
-        //     }
-        // }
         HorizontalPager(state = pagerState) { page ->
             when (page) {
                 0 -> NavigationScreen()

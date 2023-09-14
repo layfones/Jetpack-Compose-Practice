@@ -12,7 +12,7 @@ import com.layfones.composewanandroid.data.database.TagConvertor
 @TypeConverters(TagConvertor::class)
 data class Article(
     @PrimaryKey(autoGenerate = true)
-    val dbId:Int = 0,
+    var dbId: Long,
     var id: Long,
     var apkLink: String,
     var audit: Int,
@@ -45,7 +45,8 @@ data class Article(
     var type: Int,
     var userId: Long,
     var visible: Int,
-    var zan: Int
+    var zan: Int,
+    var insertTime: Long
 ){
 
     /**
