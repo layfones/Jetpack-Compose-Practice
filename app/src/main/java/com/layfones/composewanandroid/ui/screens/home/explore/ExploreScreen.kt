@@ -20,7 +20,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.layfones.composewanandroid.data.services.model.Article
 import com.layfones.composewanandroid.data.services.model.Banners
 import com.layfones.composewanandroid.navigation.LocalNavController
-import com.layfones.composewanandroid.navigation.Router
+import com.layfones.composewanandroid.navigation.RoutePath
 import com.layfones.composewanandroid.ui.components.WanBanner
 import com.layfones.composewanandroid.ui.components.WanExploreItem
 import com.layfones.composewanandroid.ui.components.WanStatePage
@@ -56,7 +56,7 @@ fun ExploreScreen(viewModel: ExploreViewModel = hiltViewModel()) {
                         Card(modifier = Modifier.padding(12.dp, 4.dp)) {
                             val banners: Banners = data[0] as Banners
                             WanBanner(banners.banners, onItemClick = { itemIndex ->
-                                navHostController.navigate(Router.web + "/${Uri.encode(banners.banners[itemIndex].url)}")
+                                navHostController.navigate(RoutePath.web + "/${Uri.encode(banners.banners[itemIndex].url)}")
                             })
 
                         }
@@ -67,10 +67,10 @@ fun ExploreScreen(viewModel: ExploreViewModel = hiltViewModel()) {
                                 WanExploreItem(article = data[index] as Article,
                                     index = index,
                                     onItemClick = { article ->
-                                        navHostController.navigate(Router.web + "/${Uri.encode(article.link)}")
+                                        navHostController.navigate(RoutePath.web + "/${Uri.encode(article.link)}")
                                     },
                                     onAuthorNameClick = { authorId ->
-                                        navHostController.navigate(Router.share + "/${authorId}")
+                                        navHostController.navigate(RoutePath.share + "/${authorId}")
                                     },
                                     onCollectionClick = {
                                         appViewModel.articleCollectAction(it)

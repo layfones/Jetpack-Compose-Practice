@@ -20,7 +20,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.navigation.LocalNavController
-import com.layfones.composewanandroid.navigation.Router
+import com.layfones.composewanandroid.navigation.RoutePath
 import com.layfones.composewanandroid.ui.components.WanBackButton
 import com.layfones.composewanandroid.ui.components.CollectItem
 import com.layfones.composewanandroid.ui.components.WanStatePage
@@ -64,7 +64,7 @@ fun CollectScreen(viewModel: CollectViewModel = hiltViewModel()) {
                     items(data.itemCount, key = data.itemKey{ it.id }) { index ->
                         val collectBean = data[index]
                         CollectItem(collect = collectBean!!, modifier = Modifier.clickable {
-                            navHostController.navigate(Router.web + "/${Uri.encode(collectBean.link)}")
+                            navHostController.navigate(RoutePath.web + "/${Uri.encode(collectBean.link)}")
                         })
                     }
                 }

@@ -2,7 +2,7 @@ package com.layfones.composewanandroid.account
 
 import androidx.navigation.NavHostController
 import com.layfones.composewanandroid.data.services.model.User
-import com.layfones.composewanandroid.navigation.Router
+import com.layfones.composewanandroid.navigation.RoutePath
 import com.layfones.composewanandroid.util.showShortToast
 
 sealed interface AccountState {
@@ -21,6 +21,6 @@ inline val AccountState.isLogin: Boolean
          action(this)
      } else {
          "请先登录".showShortToast()
-        navHostController.navigate(Router.login)
+        navHostController.navigate(RoutePath.login)
      }
  }

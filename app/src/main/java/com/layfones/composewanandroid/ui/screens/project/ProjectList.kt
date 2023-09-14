@@ -16,7 +16,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.navigation.LocalNavController
-import com.layfones.composewanandroid.navigation.Router
+import com.layfones.composewanandroid.navigation.RoutePath
 import com.layfones.composewanandroid.ui.components.WanProjectItem
 import com.layfones.composewanandroid.ui.components.WanStatePage
 
@@ -40,7 +40,7 @@ fun ProjectList(viewModel: ProjectListViewModel) {
                 items(data.itemCount, key = data.itemKey { it.id }) { index ->
                     val article = data[index]
                     WanProjectItem(article!!, Modifier.clickable {
-                        navHostController.navigate(Router.web + "/${Uri.encode(article.link)}")
+                        navHostController.navigate(RoutePath.web + "/${Uri.encode(article.link)}")
                     })
                 }
             }

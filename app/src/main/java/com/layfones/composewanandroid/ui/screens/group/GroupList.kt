@@ -15,7 +15,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.layfones.composewanandroid.navigation.LocalNavController
-import com.layfones.composewanandroid.navigation.Router
+import com.layfones.composewanandroid.navigation.RoutePath
 import com.layfones.composewanandroid.ui.components.WanPostItem
 import com.layfones.composewanandroid.ui.components.WanStatePage
 
@@ -34,7 +34,7 @@ fun GroupList(viewModel: GroupListViewModel) {
                 items(data.itemCount, key = data.itemKey { it.id }) { index ->
                     val article = data[index]
                     WanPostItem(article!!, onItemClick = { item ->
-                        navHostController.navigate(Router.web + "/${Uri.encode(item.link)}")
+                        navHostController.navigate(RoutePath.web + "/${Uri.encode(item.link)}")
                     })
                 }
             }

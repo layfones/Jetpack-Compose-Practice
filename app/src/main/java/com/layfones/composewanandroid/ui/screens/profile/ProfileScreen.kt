@@ -34,7 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.layfones.composewanandroid.R
 import com.layfones.composewanandroid.account.checkLogin
 import com.layfones.composewanandroid.navigation.LocalNavController
-import com.layfones.composewanandroid.navigation.Router
+import com.layfones.composewanandroid.navigation.RoutePath
 import com.layfones.composewanandroid.ui.WanAppViewModel
 import com.layfones.composewanandroid.ui.components.WanListItemHeader
 import com.layfones.composewanandroid.ui.components.WanSettingsListItem
@@ -61,7 +61,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                         .size(90.dp)
                         .clickable {
                             if (!viewModel.isLogin) {
-                                navHostController.navigate(Router.login)
+                                navHostController.navigate(RoutePath.login)
                             }
                         })
                 if (viewModel.isLogin) {
@@ -70,7 +70,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                         style = MaterialTheme.typography.displayMedium,
                     )
                 } else {
-                    OutlinedButton(onClick = { navHostController.navigate(Router.login) },
+                    OutlinedButton(onClick = { navHostController.navigate(RoutePath.login) },
                         modifier = Modifier.padding(top = 8.dp)) {
                         Text(text = "点击登录")
                     }
@@ -83,28 +83,28 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                 leadingIcon = R.drawable.ic_star,
                 modifier = Modifier.clickable {
                     viewModel.accountState.value.checkLogin(navHostController) {
-                        navHostController.navigate(Router.coin)
+                        navHostController.navigate(RoutePath.coin)
                     }
                 })
             WanSettingsListItem(headlineText = "消息中心",
                 leadingIcon = R.drawable.ic_message,
                 modifier = Modifier.clickable {
                     viewModel.accountState.value.checkLogin(navHostController) {
-                        navHostController.navigate(Router.message)
+                        navHostController.navigate(RoutePath.message)
                     }
                 })
             WanSettingsListItem(headlineText = "分享文章",
                 leadingIcon = R.drawable.ic_share,
                 modifier = Modifier.clickable {
                     viewModel.accountState.value.checkLogin(navHostController) {
-                        navHostController.navigate(Router.share + "/" + userBaseInfo.userInfo.id)
+                        navHostController.navigate(RoutePath.share + "/" + userBaseInfo.userInfo.id)
                     }
                 })
             WanSettingsListItem(headlineText = "收藏文章",
                 leadingIcon = R.drawable.ic_collect,
                 modifier = Modifier.clickable {
                     viewModel.accountState.value.checkLogin(navHostController) {
-                        navHostController.navigate(Router.collect)
+                        navHostController.navigate(RoutePath.collect)
                     }
                 })
         }
@@ -150,7 +150,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
             WanSettingsListItem(headlineText = "源代码",
                 leadingIcon = R.drawable.ic_code,
                 modifier = Modifier.clickable {
-                    navHostController.navigate(Router.web + "/${Uri.encode(viewModel.github)}")
+                    navHostController.navigate(RoutePath.web + "/${Uri.encode(viewModel.github)}")
                 },
                 supportingText = { Text(text = viewModel.github) })
             WanSettingsListItem(headlineText = "关于",
